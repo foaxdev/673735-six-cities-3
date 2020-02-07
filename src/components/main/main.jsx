@@ -2,10 +2,8 @@ import React from "react";
 import {Apartment} from "../apartment/apartment";
 import PropTypes from "prop-types";
 
-export const Main = (props) => {
-  const {quantity, offers} = props;
-
-  const offersList = offers.map((offer, index) => <Apartment key={offer + index} offer={offer}/>);
+export const Main = ({quantity, offers, onHeaderButtonClick}) => {
+  const offersList = offers.map((offer, index) => <Apartment key={offer + index} offer={offer} onHeaderButtonClick={onHeaderButtonClick}/>);
 
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
@@ -77,5 +75,6 @@ export const Main = (props) => {
 
 Main.propTypes = {
   quantity: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.string).isRequired
+  offers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onHeaderButtonClick: PropTypes.func.isRequired
 };
