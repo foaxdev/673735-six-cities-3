@@ -1,12 +1,15 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import {App} from "./components/app/app";
+import {offers} from "./mocks/offers";
 
 const OFFERS_QUANTITY = 500;
-const OFFERS = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Modern apartment`, `Something cool`];
-const HEADER_BUTTON_CLICK_HANDLER = () => {};
+const HEADER_HOVER_CARD_HANDLER = () => {};
 
 ReactDOM.render(
-    <App quantity={OFFERS_QUANTITY} offers={OFFERS} onHeaderButtonClick={HEADER_BUTTON_CLICK_HANDLER}/>,
+    <App
+      quantity={OFFERS_QUANTITY}
+      offers={offers}
+      onCardHover={HEADER_HOVER_CARD_HANDLER}/>,
     document.getElementById(`root`)
 );

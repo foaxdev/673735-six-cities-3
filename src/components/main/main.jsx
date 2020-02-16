@@ -2,8 +2,14 @@ import React from "react";
 import {Apartment} from "../apartment/apartment";
 import PropTypes from "prop-types";
 
-export const Main = ({quantity, offers, onHeaderButtonClick}) => {
-  const offersList = offers.map((offer, index) => <Apartment key={offer + index} offer={offer} onHeaderButtonClick={onHeaderButtonClick}/>);
+export const Main = ({quantity, offers, onCardHover}) => {
+  const offersList = offers.map((offer, index) =>
+    <Apartment
+      key={offer + index}
+      offer={offer}
+      onCardHover={onCardHover}
+    />
+  );
 
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
@@ -75,6 +81,21 @@ export const Main = ({quantity, offers, onHeaderButtonClick}) => {
 
 Main.propTypes = {
   quantity: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onHeaderButtonClick: PropTypes.func.isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavourite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    photoSrc: PropTypes.string.isRequired,
+  })).isRequired,
+  type: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  isPremium: PropTypes.bool.isRequired,
+  isFavourite: PropTypes.bool.isRequired,
+  rating: PropTypes.number.isRequired,
+  photoSrc: PropTypes.string.isRequired,
+  onCardHover: PropTypes.func.isRequired
 };

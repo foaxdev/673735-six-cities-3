@@ -3,25 +3,31 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {Apartment} from "./apartment";
 
-const TEST_OFFER = `Beautiful & luxurious apartment at great location`;
+export const TEST_OFFER = {
+  type: `apartment`,
+  price: 120,
+  title: `Wood and stone place`,
+  isPremium: true,
+  isFavourite: false,
+  rating: 4,
+  photoSrc: `img/apartment-01.jpg`
+};
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
 it(`Should header button be clicked`, () => {
-  const onHeaderButtonClick = jest.fn();
+  const onCardHover = jest.fn();
 
   const main = shallow(
       <Apartment
         offer={TEST_OFFER}
-        onHeaderButtonClick={onHeaderButtonClick}
+        onCardHover={onCardHover}
       />
   );
 
-  const welcomeButton = main.find(`h2.place-card__name`);
+  main.props().onMouseOver();
 
-  welcomeButton.props().onClick();
-
-  expect(onHeaderButtonClick.mock.calls.length).toBe(1);
+  expect(onCardHover.mock.calls.length).toBe(1);
 });
