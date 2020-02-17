@@ -82,12 +82,5 @@ Main.propTypes = {
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
   })).isRequired,
-  type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  isPremium: PropTypes.bool.isRequired,
-  isFavourite: PropTypes.bool.isRequired,
-  rating: PropTypes.number.isRequired,
-  photoSrc: PropTypes.string.isRequired,
   onCardHover: PropTypes.func.isRequired
 };

@@ -17,7 +17,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should header button be clicked`, () => {
+it(`Card should be hovered`, () => {
   const onCardHover = jest.fn();
 
   const main = shallow(

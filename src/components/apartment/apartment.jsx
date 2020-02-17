@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Apartment = ({offer, onCardHover}) => {
-  const {type, price, title, isPremium, isFavourite, rating, photoSrc} = offer;
+  const {type, price, title, isPremium, rating, photoSrc} = offer;
   const ratingPercentage = `${rating * 10}%`;
   const premiumClass = isPremium ? `place-card__mark` : `place-card__mark visually-hidden`;
 
@@ -45,7 +45,7 @@ export const Apartment = ({offer, onCardHover}) => {
 };
 
 Apartment.propTypes = {
-  offer: PropTypes.arrayOf(PropTypes.shape({
+  offer: PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -53,6 +53,6 @@ Apartment.propTypes = {
     isFavourite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
-  })).isRequired,
+  }).isRequired,
   onCardHover: PropTypes.func.isRequired
 };
