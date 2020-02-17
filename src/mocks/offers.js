@@ -1,9 +1,4 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {App} from "./app";
-
-const TEST_OFFERS_QUANTITY = 500;
-export const TEST_OFFERS = [
+export const offers = [
   {
     type: `apartment`,
     price: 120,
@@ -41,16 +36,3 @@ export const TEST_OFFERS = [
     photoSrc: `img/apartment-01.jpg`
   }
 ];
-const TEST_CARD_HOVER_HANDLER = () => {};
-
-it(`Should render Apartment item correctly`, () => {
-  const tree = renderer
-    .create(<App
-      quantity={TEST_OFFERS_QUANTITY}
-      offers={TEST_OFFERS}
-      onCardHover={TEST_CARD_HOVER_HANDLER}
-    />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});

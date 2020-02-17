@@ -1,8 +1,7 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {App} from "./app";
+import renderer from "react-test-renderer";
+import React from "react";
+import {ApartmentsList} from "./apartments-list";
 
-const TEST_OFFERS_QUANTITY = 500;
 export const TEST_OFFERS = [
   {
     type: `apartment`,
@@ -43,10 +42,9 @@ export const TEST_OFFERS = [
 ];
 const TEST_CARD_HOVER_HANDLER = () => {};
 
-it(`Should render Apartment item correctly`, () => {
+it(`Should render ApartmentsList item correctly`, () => {
   const tree = renderer
-    .create(<App
-      quantity={TEST_OFFERS_QUANTITY}
+    .create(<ApartmentsList
       offers={TEST_OFFERS}
       onCardHover={TEST_CARD_HOVER_HANDLER}
     />)
