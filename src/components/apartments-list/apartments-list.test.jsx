@@ -41,12 +41,14 @@ export const TEST_OFFERS = [
   }
 ];
 const TEST_CARD_HOVER_HANDLER = () => {};
+const TEST_HEADER_CLICK_HANDLER = () => {};
 
 it(`Should render ApartmentsList item correctly`, () => {
   const tree = renderer
     .create(<ApartmentsList
       offers={TEST_OFFERS}
       onCardHover={TEST_CARD_HOVER_HANDLER}
+      onHeaderClick={TEST_HEADER_CLICK_HANDLER}
     />)
     .toJSON();
 

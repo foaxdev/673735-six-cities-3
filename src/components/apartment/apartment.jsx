@@ -36,7 +36,7 @@ export const Apartment = ({index, offer, onCardHover, onHeaderClick}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#" onClick={() => onHeaderClick(index)}>{title}</a>
+          <a href="#" className="place-card__link" onClick={() => onHeaderClick(index)}>{title}</a>
         </h2>
         <p className="place-card__type" style={{textTransform: `capitalize`}}>{type}</p>
       </div>
