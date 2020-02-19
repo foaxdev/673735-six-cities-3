@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Apartment = ({offer, onCardHover}) => {
+export const Apartment = ({index, offer, onCardHover, onHeaderClick}) => {
   const {type, price, title, isPremium, rating, photoSrc} = offer;
-  const ratingPercentage = `${rating * 10}%`;
+  const ratingPercentage = `${Math.floor(rating * 100 / 5)}%`;
   const premiumClass = isPremium ? `place-card__mark` : `place-card__mark visually-hidden`;
 
   return (
@@ -36,7 +36,7 @@ export const Apartment = ({offer, onCardHover}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <a href="#" onClick={() => onHeaderClick(index)}>{title}</a>
         </h2>
         <p className="place-card__type" style={{textTransform: `capitalize`}}>{type}</p>
       </div>
@@ -45,6 +45,7 @@ export const Apartment = ({offer, onCardHover}) => {
 };
 
 Apartment.propTypes = {
+  index: PropTypes.number.isRequired,
   offer: PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -54,5 +55,6 @@ Apartment.propTypes = {
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
   }).isRequired,
-  onCardHover: PropTypes.func.isRequired
+  onCardHover: PropTypes.func.isRequired,
+  onHeaderClick: PropTypes.func.isRequired
 };

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {ApartmentsList} from "../apartments-list/apartments-list";
 
-export const Main = ({quantity, offers, onCardHover}) => {
+export const Main = ({quantity, offers, onCardHover, onHeaderClick}) => {
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
@@ -61,7 +61,7 @@ export const Main = ({quantity, offers, onCardHover}) => {
               <li className="places__option" tabIndex="0">Top rated first</li>
             </ul>
           </form>
-          <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} onCardHover={onCardHover}/>}</div>
+          <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
         </section>
         <div className="cities__right-section">
           <section className="cities__map map"/>
@@ -82,5 +82,6 @@ Main.propTypes = {
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
   })).isRequired,
-  onCardHover: PropTypes.func.isRequired
+  onCardHover: PropTypes.func.isRequired,
+  onHeaderClick: PropTypes.func.isRequired
 };
