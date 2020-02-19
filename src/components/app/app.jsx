@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {Main} from "../main/main";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {ApartmentDetailed} from "../apartment-detailed/apartment-datailed";
+import {ApartmentDetailed} from "../apartment-detailed/apartment-detailed";
 
 export class App extends PureComponent {
 
