@@ -20,14 +20,33 @@ Enzyme.configure({
 it(`Card should be hovered`, () => {
   const onCardHover = jest.fn();
 
-  const main = shallow(
+  const apartmentBlock = shallow(
       <Apartment
+        index={0}
         offer={TEST_OFFER}
         onCardHover={onCardHover}
+        onHeaderClick={() => {}}
       />
   );
 
-  main.props().onMouseOver();
-
+  apartmentBlock.props().onMouseOver();
   expect(onCardHover.mock.calls.length).toBe(1);
+});
+
+it(`When click on apt preview its page should be rendered`, () => {
+  const onHeaderClick = jest.fn();
+
+  const apartmentBlock = shallow(
+      <Apartment
+        index={0}
+        offer={TEST_OFFER}
+        onCardHover={() => {}}
+        onHeaderClick={onHeaderClick}
+      />
+  );
+
+  const header = apartmentBlock.find(`.place-card__link`);
+
+  header.props().onClick();
+  expect(onHeaderClick.mock.calls.length).toBe(1);
 });

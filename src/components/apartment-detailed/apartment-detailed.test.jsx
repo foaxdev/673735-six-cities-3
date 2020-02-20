@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Apartment} from "./apartment";
+import {ApartmentDetailed} from "./apartment-detailed";
 
-export const TEST_OFFER = {
+const TEST_OFFER = {
   type: `apartment`,
   price: 120,
   title: `Wood and stone place`,
@@ -50,16 +50,11 @@ export const TEST_OFFER = {
     isSuper: true
   }
 };
-const TEST_CARD_HOVER_HANDLER = () => {};
-const TEST_HEADER_CLICK_HANDLER = () => {};
 
-it(`Should render Apartment item correctly`, () => {
+it(`Should render Detailed Apartment item correctly`, () => {
   const tree = renderer
-    .create(<Apartment
-      index={0}
+    .create(<ApartmentDetailed
       offer={TEST_OFFER}
-      onCardHover={TEST_CARD_HOVER_HANDLER}
-      onHeaderClick={TEST_HEADER_CLICK_HANDLER}
     />)
     .toJSON();
 

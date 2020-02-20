@@ -42,6 +42,7 @@ export const TEST_OFFERS = [
   }
 ];
 const TEST_CARD_HOVER_HANDLER = () => {};
+const TEST_HEADER_CLICK_HANDLER = () => {};
 
 it(`Should render Main screen correctly`, () => {
   const tree = renderer
@@ -49,6 +50,7 @@ it(`Should render Main screen correctly`, () => {
       quantity={TEST_OFFERS_QUANTITY}
       offers={TEST_OFFERS}
       onCardHover={TEST_CARD_HOVER_HANDLER}
+      onHeaderClick={TEST_HEADER_CLICK_HANDLER}
     />)
     .toJSON();
 
