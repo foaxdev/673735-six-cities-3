@@ -45,7 +45,8 @@ export const offers = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Some`,
       isSuper: true
-    }
+    },
+    coordinates: [52.3909553943508, 4.85309666406198]
   },
   {
     type: `room`,
@@ -84,7 +85,8 @@ export const offers = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Akira`,
       isSuper: false
-    }
+    },
+    coordinates: [52.369553943508, 4.85309666406198]
   },
   {
     type: `house`,
@@ -130,7 +132,8 @@ export const offers = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Miki`,
       isSuper: false
-    }
+    },
+    coordinates: [52.3909553943508, 4.929309666406198]
   },
   {
     type: `hotel`,
@@ -172,6 +175,7 @@ export const offers = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Tomoko`,
       isSuper: true
-    }
+    },
+    coordinates: [52.3809553943508, 4.939309666406198]
   }
 ];

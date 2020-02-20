@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {ApartmentsList} from "../apartments-list/apartments-list";
+import {Map} from "../map/map";
 
-export const Main = ({quantity, offers, onCardHover, onHeaderClick}) => {
+export const Main = ({quantity, city, offerCoordinates, offers, onCardHover, onHeaderClick}) => {
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
@@ -64,7 +65,7 @@ export const Main = ({quantity, offers, onCardHover, onHeaderClick}) => {
           <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
         </section>
         <div className="cities__right-section">
-          <section className="cities__map map"/>
+          <section className="cities__map map"><Map city={city} offerCoordinates={offerCoordinates}/></section>
         </div>
       </div>
     </div>
@@ -73,6 +74,8 @@ export const Main = ({quantity, offers, onCardHover, onHeaderClick}) => {
 
 Main.propTypes = {
   quantity: PropTypes.number.isRequired,
+  city: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

@@ -41,6 +41,8 @@ export class App extends PureComponent {
       return (
         <Main
           quantity={this.props.quantity}
+          city={this.props.city}
+          offerCoordinates={this.props.offerCoordinates}
           offers={this.props.offers}
           onCardHover={this.props.onCardHover}
           onHeaderClick={this.onHeaderClick}
@@ -54,6 +56,8 @@ export class App extends PureComponent {
 
 App.propTypes = {
   quantity: PropTypes.number.isRequired,
+  city: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
