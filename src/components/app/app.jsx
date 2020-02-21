@@ -41,7 +41,7 @@ export class App extends PureComponent {
       return (
         <Main
           quantity={this.props.quantity}
-          city={this.props.city}
+          cityCoordinates={this.props.cityCoordinates}
           offerCoordinates={this.props.offerCoordinates}
           offers={this.props.offers}
           onCardHover={this.props.onCardHover}
@@ -56,7 +56,7 @@ export class App extends PureComponent {
 
 App.propTypes = {
   quantity: PropTypes.number.isRequired,
-  city: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,

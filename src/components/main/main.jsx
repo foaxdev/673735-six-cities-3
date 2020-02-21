@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import {ApartmentsList} from "../apartments-list/apartments-list";
 import {Map} from "../map/map";
 
-export const Main = ({quantity, city, offerCoordinates, offers, onCardHover, onHeaderClick}) => {
+export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCardHover, onHeaderClick}) => {
+  const coordinates = offers.map((offer) => offer.coordinates);
+
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
@@ -65,7 +67,7 @@ export const Main = ({quantity, city, offerCoordinates, offers, onCardHover, onH
           <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
         </section>
         <div className="cities__right-section">
-          <section className="cities__map map"><Map city={city} offerCoordinates={offerCoordinates}/></section>
+          <section className="cities__map map"><Map cityCoordinates={cityCoordinates} availableOffers={coordinates} offerCoordinates={offerCoordinates}/></section>
         </div>
       </div>
     </div>
@@ -74,7 +76,7 @@ export const Main = ({quantity, city, offerCoordinates, offers, onCardHover, onH
 
 Main.propTypes = {
   quantity: PropTypes.number.isRequired,
-  city: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
@@ -84,6 +86,7 @@ Main.propTypes = {
     isFavourite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
   })).isRequired,
   onCardHover: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired
