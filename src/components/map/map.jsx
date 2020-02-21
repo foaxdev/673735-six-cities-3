@@ -32,7 +32,7 @@ export class Map extends PureComponent {
 
     for (let i = 0; i < availableOffers.length; i++) {
       leaflet
-        .marker([availableOffers[i][0],availableOffers[i][1]])
+        .marker([availableOffers[i][0], availableOffers[i][1]])
         .addTo(map);
     }
   }
@@ -47,7 +47,7 @@ export class Map extends PureComponent {
 Map.propTypes = {
   cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   availableOffers: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+      PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
   ).isRequired,
   offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
 };
