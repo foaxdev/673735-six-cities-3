@@ -144,6 +144,11 @@ export const offers = [
         date: 1082368200000,
         text: `So so, could be better`
       }
+    ],
+    offersNearby: [
+      [52.3900000943508, 4.85309600000098],
+      [52.3900000900008, 4.85000006406198],
+      [52.3911100943508, 4.85309666400000]
     ]
   },
   {
@@ -202,6 +207,11 @@ export const offers = [
         date: 1500368261000,
         text: `Good place, good food, good everything`
       }
+    ],
+    offersNearby: [
+      [52.3900000941111, 4.85309666406198],
+      [52.3111000900008, 4.85309666406198],
+      [52.3911101111508, 4.85309666406198]
     ]
   },
   {
@@ -259,6 +269,11 @@ export const offers = [
         date: 1082368261115,
         text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
       }
+    ],
+    offersNearby: [
+      [52.3900999943508, 4.85309666406198],
+      [52.3909999900008, 4.85309666406198],
+      [52.3911100999908, 4.85309666406198]
     ]
   },
   {
@@ -328,6 +343,11 @@ export const offers = [
         date: 1580068260000,
         text: `Excellent`
       }
+    ],
+    offersNearby: [
+      [52.3900000999999, 4.85309666406198],
+      [52.4999000900008, 4.85309666406198],
+      [52.3991100940008, 4.85309666406198]
     ]
   }
 ];

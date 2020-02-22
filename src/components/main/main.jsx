@@ -67,7 +67,7 @@ export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCar
           <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
         </section>
         <div className="cities__right-section">
-          <section className="cities__map map"><Map cityCoordinates={cityCoordinates} availableOffers={coordinates} offerCoordinates={offerCoordinates}/></section>
+          <section className="cities__map map">{<Map cityCoordinates={cityCoordinates} availableOffers={coordinates} offerCoordinates={offerCoordinates}/>}</section>
         </div>
       </div>
     </div>
@@ -87,6 +87,11 @@ Main.propTypes = {
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
     coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired
+    }).isRequired,
     reviews: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -96,7 +101,8 @@ Main.propTypes = {
         date: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired
       }).isRequired
-    ).isRequired
+    ).isRequired,
+    offersNearby: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired).isRequired).isRequired
   })).isRequired,
   onCardHover: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired

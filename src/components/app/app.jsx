@@ -29,7 +29,7 @@ export class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/offer">
-            <ApartmentDetailed reviews={this.props.offers[0].reviews} offer={this.props.offers[0]}/>
+            <ApartmentDetailed offer={this.props.offers[0]}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -49,7 +49,7 @@ export class App extends PureComponent {
         />
       );
     } else {
-      return (<ApartmentDetailed reviews={this.props.offers[this.state.currentPage].reviews} offer={this.props.offers[this.state.currentPage]}/>);
+      return (<ApartmentDetailed offer={this.props.offers[this.state.currentPage]}/>);
     }
   }
 }
@@ -66,6 +66,12 @@ App.propTypes = {
     isFavourite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired
+    }).isRequired,
     reviews: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -75,7 +81,8 @@ App.propTypes = {
         date: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired
       }).isRequired
-    ).isRequired
+    ).isRequired,
+    offersNearby: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired).isRequired).isRequired
   })).isRequired,
   onCardHover: PropTypes.func.isRequired
 };

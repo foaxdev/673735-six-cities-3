@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {ReviewsList} from "../reviews-list/reviews-list";
+import {Map} from "../map/map";
 
-export const ApartmentDetailed = ({offer}) => {
-  const {type, price, title, isPremium, rating, photos, description, bedrooms, guests, amenities, host, reviews} = offer;
+export const ApartmentDetailed = (props) => {
+  const {type, price, title, isPremium, rating, photos, description, bedrooms, guests, amenities, host, reviews, coordinates, offersNearby} = props.offer;
   const ratingPercentage = `${Math.ceil(rating) * 100 / 5}%`;
   const premiumClass = isPremium ? `property__mark` : `property__mark visually-hidden`;
   const superHostClass = host.isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`;
@@ -140,7 +141,7 @@ export const ApartmentDetailed = ({offer}) => {
           </section>
         </div>
       </div>
-      <section className="property__map map"/>
+      <section className="property__map map"><Map cityCoordinates={coordinates} availableOffers={offersNearby} offerCoordinates={null}/></section>
     </section>
   );
 };
@@ -161,6 +162,7 @@ ApartmentDetailed.propTypes = {
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
     amenities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     host: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -175,6 +177,7 @@ ApartmentDetailed.propTypes = {
         date: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired
       }).isRequired
-    ).isRequired
+    ).isRequired,
+    offersNearby: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired).isRequired).isRequired
   }).isRequired
 };
