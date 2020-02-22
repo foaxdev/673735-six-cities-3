@@ -19,6 +19,7 @@ export const formatDate = (givenDate) => {
 
   const dateYear = date.getFullYear();
   const dateMonth = date.getMonth();
+  const dateDay = leftPad(date.getDate(), `0`, 2);
 
-  return `${monthNames[dateMonth]} ${dateYear}`;
+  return `${monthNames[dateMonth]} ${dateDay}, ${dateYear}`;
 };
