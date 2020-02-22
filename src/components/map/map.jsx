@@ -18,8 +18,6 @@ export class Map extends PureComponent {
     });
     map.setView(this.props.cityCoordinates, 12);
 
-    const availableOffers = this.props.availableOffers;
-
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -30,9 +28,9 @@ export class Map extends PureComponent {
       .marker(this.props.offerCoordinates, {icon})
       .addTo(map);
 
-    for (let i = 0; i < availableOffers.length; i++) {
+    for (let i = 0; i < this.props.availableOffers.length; i++) {
       leaflet
-        .marker([availableOffers[i][0], availableOffers[i][1]])
+        .marker([this.props.availableOffers[i][0], this.props.availableOffers[i][1]])
         .addTo(map);
     }
   }
