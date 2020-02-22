@@ -46,6 +46,7 @@ export const offers = [
       name: `Some`,
       isSuper: true
     },
+    coordinates: [52.3909553943508, 4.85309666406198],
     reviews: [
       {
         id: 0,
@@ -183,6 +184,7 @@ export const offers = [
       name: `Akira`,
       isSuper: false
     },
+    coordinates: [52.369553943508, 4.85309666406198],
     reviews: [
       {
         id: 12,
@@ -247,6 +249,7 @@ export const offers = [
       name: `Miki`,
       isSuper: false
     },
+    coordinates: [52.3909553943508, 4.929309666406198],
     reviews: [
       {
         id: 14,
@@ -299,6 +302,7 @@ export const offers = [
       name: `Tomoko`,
       isSuper: true
     },
+    coordinates: [52.3809553943508, 4.939309666406198],
     reviews: [
       {
         id: 15,
