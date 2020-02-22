@@ -50,7 +50,8 @@ export const TEST_OFFERS = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Some`,
       isSuper: true
-    }
+    },
+    coordinates: [52.3909553943508, 4.85309666406198]
   },
   {
     type: `room`,
@@ -89,7 +90,8 @@ export const TEST_OFFERS = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Akira`,
       isSuper: false
-    }
+    },
+    coordinates: [52.369553943508, 4.85309666406198]
   },
   {
     type: `house`,
@@ -135,7 +137,8 @@ export const TEST_OFFERS = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Miki`,
       isSuper: false
-    }
+    },
+    coordinates: [52.3909553943508, 4.929309666406198]
   },
   {
     type: `hotel`,
@@ -177,15 +180,20 @@ export const TEST_OFFERS = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Tomoko`,
       isSuper: true
-    }
+    },
+    coordinates: [52.3809553943508, 4.939309666406198]
   }
 ];
 const TEST_CARD_HOVER_HANDLER = () => {};
+const TEST_CITY_COORDINATES = [52.38333, 4.9];
+const TEST_OFFER_COORDINATES = [52.3709553943508, 4.89309666406198];
 
 it(`Should render Apartment item correctly`, () => {
   const tree = renderer
     .create(<App
       quantity={TEST_OFFERS_QUANTITY}
+      cityCoordinates={TEST_CITY_COORDINATES}
+      offerCoordinates={TEST_OFFER_COORDINATES}
       offers={TEST_OFFERS}
       onCardHover={TEST_CARD_HOVER_HANDLER}
     />)

@@ -48,7 +48,8 @@ export const TEST_OFFER = {
     avatar: `img/avatar-angelina.jpg`,
     name: `Some`,
     isSuper: true
-  }
+  },
+  coordinates: [52.3809553943508, 4.939309666406198]
 };
 const TEST_CARD_HOVER_HANDLER = () => {};
 const TEST_HEADER_CLICK_HANDLER = () => {};
