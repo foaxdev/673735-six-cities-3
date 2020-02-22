@@ -5,9 +5,9 @@ import {Review} from "../review/review";
 export const ReviewsList = ({reviews}) => {
   reviews.sort((a, b) => b.date - a.date);
 
-  const reviewsList = reviews.map((review, index) =>
+  const reviewsList = reviews.slice(0, 10).map((review, index) =>
     <Review
-      key={review.rating + index}
+      key={review.text + index}
       id={review.id}
       rating={review.rating}
       avatar={review.avatar}
