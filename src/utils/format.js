@@ -1,4 +1,4 @@
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
 export const leftPad = (str, padString, targetLength) => {
   return str.toString().padStart(targetLength, padString);

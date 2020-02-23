@@ -51,7 +51,105 @@ export const TEST_OFFERS = [
       name: `Some`,
       isSuper: true
     },
-    coordinates: [52.3909553943508, 4.85309666406198]
+    coordinates: [52.3909553943508, 4.85309666406198],
+    reviews: [
+      {
+        id: 0,
+        avatar: `img/avatar-max.jpg`,
+        name: `Max`,
+        rating: 5,
+        date: 1082368261115,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
+      },
+      {
+        id: 1,
+        avatar: `img/avatar-max.jpg`,
+        name: `Anna`,
+        rating: 4,
+        date: 1500368261000,
+        text: `Good place, good food, good everything`
+      },
+      {
+        id: 2,
+        avatar: `img/avatar-max.jpg`,
+        name: `Akira`,
+        rating: 5,
+        date: 1580068260000,
+        text: `Excellent`
+      },
+      {
+        id: 3,
+        avatar: `img/avatar-max.jpg`,
+        name: `Miki`,
+        rating: 1,
+        date: 1082368200000,
+        text: `So so, could be better`
+      },
+      {
+        id: 4,
+        avatar: `img/avatar-max.jpg`,
+        name: `Max`,
+        rating: 5,
+        date: 1082368261115,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
+      },
+      {
+        id: 5,
+        avatar: `img/avatar-max.jpg`,
+        name: `Anna`,
+        rating: 4,
+        date: 1500368261000,
+        text: `Good place, good food, good everything`
+      },
+      {
+        id: 6,
+        avatar: `img/avatar-max.jpg`,
+        name: `Akira`,
+        rating: 5,
+        date: 1580068260000,
+        text: `Excellent`
+      },
+      {
+        id: 7,
+        avatar: `img/avatar-max.jpg`,
+        name: `Miki`,
+        rating: 1,
+        date: 1082368200000,
+        text: `So so, could be better`
+      },
+      {
+        id: 8,
+        avatar: `img/avatar-max.jpg`,
+        name: `Max`,
+        rating: 5,
+        date: 1082368261115,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
+      },
+      {
+        id: 9,
+        avatar: `img/avatar-max.jpg`,
+        name: `Anna`,
+        rating: 4,
+        date: 1500368261000,
+        text: `Good place, good food, good everything`
+      },
+      {
+        id: 10,
+        avatar: `img/avatar-max.jpg`,
+        name: `Akira`,
+        rating: 5,
+        date: 1580068260000,
+        text: `Excellent`
+      },
+      {
+        id: 11,
+        avatar: `img/avatar-max.jpg`,
+        name: `Miki`,
+        rating: 1,
+        date: 1082368200000,
+        text: `So so, could be better`
+      }
+    ]
   },
   {
     type: `room`,
@@ -91,7 +189,25 @@ export const TEST_OFFERS = [
       name: `Akira`,
       isSuper: false
     },
-    coordinates: [52.369553943508, 4.85309666406198]
+    coordinates: [52.369553943508, 4.85309666406198],
+    reviews: [
+      {
+        id: 12,
+        avatar: `img/avatar-max.jpg`,
+        name: `Max`,
+        rating: 4.8,
+        date: 1082368261115,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
+      },
+      {
+        id: 13,
+        avatar: `img/avatar-max.jpg`,
+        name: `Anna`,
+        rating: 4,
+        date: 1500368261000,
+        text: `Good place, good food, good everything`
+      }
+    ]
   },
   {
     type: `house`,
@@ -138,7 +254,17 @@ export const TEST_OFFERS = [
       name: `Miki`,
       isSuper: false
     },
-    coordinates: [52.3909553943508, 4.929309666406198]
+    coordinates: [52.3909553943508, 4.929309666406198],
+    reviews: [
+      {
+        id: 14,
+        avatar: `img/avatar-max.jpg`,
+        name: `Max`,
+        rating: 4,
+        date: 1082368261115,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
+      }
+    ]
   },
   {
     type: `hotel`,
@@ -181,7 +307,33 @@ export const TEST_OFFERS = [
       name: `Tomoko`,
       isSuper: true
     },
-    coordinates: [52.3809553943508, 4.939309666406198]
+    coordinates: [52.3809553943508, 4.939309666406198],
+    reviews: [
+      {
+        id: 15,
+        avatar: `img/avatar-max.jpg`,
+        name: `Max`,
+        rating: 3,
+        date: 1082368261115,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
+      },
+      {
+        id: 16,
+        avatar: `img/avatar-max.jpg`,
+        name: `Anna`,
+        rating: 4,
+        date: 1500368261000,
+        text: `Good place, good food, good everything`
+      },
+      {
+        id: 17,
+        avatar: `img/avatar-max.jpg`,
+        name: `Akira`,
+        rating: 5,
+        date: 1580068260000,
+        text: `Excellent`
+      }
+    ]
   }
 ];
 const TEST_CARD_HOVER_HANDLER = () => {};

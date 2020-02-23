@@ -178,14 +178,14 @@ ApartmentDetailed.propTypes = {
       isSuper: PropTypes.bool.isRequired
     }).isRequired,
     reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        avatar: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        date: PropTypes.number.isRequired,
-        text: PropTypes.string.isRequired
-      }).isRequired
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          avatar: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          rating: PropTypes.number.isRequired,
+          date: PropTypes.number.isRequired,
+          text: PropTypes.string.isRequired
+        }).isRequired
     ).isRequired
   }).isRequired,
   offersNearby: PropTypes.arrayOf(PropTypes.shape({
@@ -203,14 +203,14 @@ ApartmentDetailed.propTypes = {
       isSuper: PropTypes.bool.isRequired
     }).isRequired,
     reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        avatar: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        date: PropTypes.number.isRequired,
-        text: PropTypes.string.isRequired
-      }).isRequired
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          avatar: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          rating: PropTypes.number.isRequired,
+          date: PropTypes.number.isRequired,
+          text: PropTypes.string.isRequired
+        }).isRequired
     ).isRequired
   })).isRequired,
   onOfferCardHover: PropTypes.func.isRequired,

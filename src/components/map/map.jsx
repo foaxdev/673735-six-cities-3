@@ -6,9 +6,9 @@ export class Map extends PureComponent {
 
   componentDidMount() {
     const icon = leaflet.icon({
-        iconUrl: `img/pin.svg`,
-        iconSize: [30, 40]
-      });
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 40]
+    });
 
     const map = leaflet.map(`map`, {
       center: this.props.cityCoordinates,
