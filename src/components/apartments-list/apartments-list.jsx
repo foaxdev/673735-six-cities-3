@@ -13,13 +13,15 @@ export class ApartmentsList extends PureComponent {
   }
 
   render() {
-    const {offers, onCardHover, onHeaderClick} = this.props;
+    const {offers, mainClass, showPremium, onCardHover, onHeaderClick} = this.props;
 
     return offers.map((offer, index) =>
       <Apartment
         index={index}
         key={offer + index}
         offer={offer}
+        showPremium={showPremium}
+        mainClass={mainClass}
         onCardHover={onCardHover}
         onHeaderClick={onHeaderClick}
       />
@@ -60,10 +62,11 @@ ApartmentsList.propTypes = {
           date: PropTypes.number.isRequired,
           text: PropTypes.string.isRequired
         }).isRequired
-      ).isRequired,
-      offersNearby: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired).isRequired).isRequired
+      ).isRequired
     })
   ).isRequired,
+  mainClass: PropTypes.string.isRequired,
+  showPremium: PropTypes.bool.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired
 };

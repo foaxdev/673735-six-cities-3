@@ -1,17 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Apartment = ({index, offer, onCardHover, onHeaderClick}) => {
+export const Apartment = ({index, offer, mainClass, showPremium, onCardHover, onHeaderClick}) => {
   const {type, price, title, isPremium, rating, photoSrc} = offer;
   const ratingPercentage = `${Math.floor(rating * 100 / 5)}%`;
-  const premiumClass = isPremium ? `place-card__mark` : `place-card__mark visually-hidden`;
+  const premiumClass = isPremium && showPremium ? `place-card__mark` : `place-card__mark visually-hidden`;
+  const articleClass = `${mainClass}__place-card place-card`;
+  const imageWrapClass = `${mainClass}__image-wrapper place-card__image-wrapper`;
 
   return (
-    <article className="cities__place-card place-card" onMouseOver={onCardHover}>
+    <article className={articleClass} onMouseOver={onCardHover} style={{marginLeft: `8px`}}>
       <div className={premiumClass}>
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={imageWrapClass}>
         <a href="#">
           <img className="place-card__image" src={photoSrc} width="260" height="200" alt="Place image"/>
         </a>
@@ -55,6 +57,8 @@ Apartment.propTypes = {
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
   }).isRequired,
+  showPremium: PropTypes.bool.isRequired,
+  mainClass: PropTypes.string.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired
 };

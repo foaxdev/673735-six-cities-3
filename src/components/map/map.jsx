@@ -5,14 +5,10 @@ import leaflet from "leaflet";
 export class Map extends PureComponent {
 
   componentDidMount() {
-    let icon = null;
-
-    if (this.props.offerCoordinates) {
-      icon = leaflet.icon({
+    const icon = leaflet.icon({
         iconUrl: `img/pin.svg`,
         iconSize: [30, 40]
       });
-    }
 
     const map = leaflet.map(`map`, {
       center: this.props.cityCoordinates,
@@ -28,11 +24,9 @@ export class Map extends PureComponent {
       })
       .addTo(map);
 
-    if (this.props.offerCoordinates) {
-      leaflet
-        .marker(this.props.offerCoordinates, {icon})
-        .addTo(map);
-    }
+    leaflet
+      .marker(this.props.offerCoordinates, {icon})
+      .addTo(map);
 
     for (let i = 0; i < this.props.availableOffers.length; i++) {
       leaflet
@@ -53,5 +47,5 @@ Map.propTypes = {
   availableOffers: PropTypes.arrayOf(
       PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
   ).isRequired,
-  offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired)
+  offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
 };

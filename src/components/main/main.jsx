@@ -64,7 +64,7 @@ export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCar
               <li className="places__option" tabIndex="0">Top rated first</li>
             </ul>
           </form>
-          <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
+          <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} mainClass={`cities`} showPremium={true} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
         </section>
         <div className="cities__right-section">
           <section className="cities__map map">{<Map cityCoordinates={cityCoordinates} availableOffers={coordinates} offerCoordinates={offerCoordinates}/>}</section>
@@ -101,8 +101,7 @@ Main.propTypes = {
         date: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired
       }).isRequired
-    ).isRequired,
-    offersNearby: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number.isRequired).isRequired).isRequired
+    ).isRequired
   })).isRequired,
   onCardHover: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired
