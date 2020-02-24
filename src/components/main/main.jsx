@@ -4,7 +4,7 @@ import {ApartmentsList} from "../apartments-list/apartments-list";
 import {Map} from "../map/map";
 import {CitiesList} from "../cities-list/cities-list";
 
-export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCardHover, onHeaderClick}) => {
+export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCardHover, onHeaderClick, onCityClick}) => {
   const coordinates = offers.map((offer) => offer.coordinates);
   const cities = Array.from(new Set(offers.map((offer) => offer.city))).slice(0, 6);
 
@@ -12,7 +12,7 @@ export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCar
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
       <section className="locations container">
-        <CitiesList cities={cities}/>
+        <CitiesList cities={cities} onCityClick={onCityClick}/>
       </section>
     </div>
     <div className="cities">
@@ -75,5 +75,6 @@ Main.propTypes = {
     ).isRequired
   })).isRequired,
   onCardHover: PropTypes.func.isRequired,
-  onHeaderClick: PropTypes.func.isRequired
+  onHeaderClick: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired
 };
