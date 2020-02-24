@@ -2,46 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import {ApartmentsList} from "../apartments-list/apartments-list";
 import {Map} from "../map/map";
+import {CitiesList} from "../cities-list/cities-list";
 
-export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCardHover, onHeaderClick}) => {
+export const Main = ({quantity, cityCoordinates, offerCoordinates, cities, offers, onCardHover, onHeaderClick, onCityClick}) => {
   const coordinates = offers.map((offer) => offer.coordinates);
 
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
       <section className="locations container">
-        <ul className="locations__list tabs__list">
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Paris</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Cologne</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Brussels</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item tabs__item--active">
-              <span>Amsterdam</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Hamburg</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Dusseldorf</span>
-            </a>
-          </li>
-        </ul>
+        <CitiesList cities={cities} onCityClick={onCityClick}/>
       </section>
     </div>
     <div className="cities">
@@ -64,10 +34,10 @@ export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCar
               <li className="places__option" tabIndex="0">Top rated first</li>
             </ul>
           </form>
-          <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
+          <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} mainClass={`cities`} showPremium={true} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
         </section>
         <div className="cities__right-section">
-          <section className="cities__map map"><Map cityCoordinates={cityCoordinates} availableOffers={coordinates} offerCoordinates={offerCoordinates}/></section>
+          <section className="cities__map map">{<Map cityCoordinates={cityCoordinates} availableOffers={coordinates} offerCoordinates={offerCoordinates}/>}</section>
         </div>
       </div>
     </div>
@@ -78,6 +48,7 @@ Main.propTypes = {
   quantity: PropTypes.number.isRequired,
   cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -86,8 +57,24 @@ Main.propTypes = {
     isFavourite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired
+    }).isRequired,
+    reviews: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          avatar: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          rating: PropTypes.number.isRequired,
+          date: PropTypes.number.isRequired,
+          text: PropTypes.string.isRequired
+        }).isRequired
+    ).isRequired
   })).isRequired,
   onCardHover: PropTypes.func.isRequired,
-  onHeaderClick: PropTypes.func.isRequired
+  onHeaderClick: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired
 };

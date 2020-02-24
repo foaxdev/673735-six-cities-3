@@ -11,13 +11,21 @@ export class App extends PureComponent {
 
     this.state = {
       currentPage: -1,
+      city: this.props.offers[0].city
     };
     this.onHeaderClick = this.onHeaderClick.bind(this);
+    this.onCityClick = this.onCityClick(this);
   }
 
   onHeaderClick(newPage) {
     this.setState({
       currentPage: newPage
+    });
+  }
+
+  onCityClick(newCity) {
+    this.setState({
+      city: newCity
     });
   }
 
@@ -38,14 +46,20 @@ export class App extends PureComponent {
 
   _renderScreen() {
     if (this.state.currentPage === -1) {
+      const availableCities = Array.from(new Set(this.props.offers.map((offer) => offer.city))).slice(0, 6);
+      const offersByCity = this.props.offers.map((offer) => offer.city === this.state.city);
+      const quantityOfOffersByCity = this.props.offers.map((offer) => offer.city === this.state.city).length;
+
       return (
         <Main
-          quantity={this.props.quantity}
+          quantity={quantityOfOffersByCity}
           cityCoordinates={this.props.cityCoordinates}
           offerCoordinates={this.props.offerCoordinates}
-          offers={this.props.offers}
+          cities={availableCities}
+          offers={offersByCity}
           onCardHover={this.props.onCardHover}
           onHeaderClick={this.onHeaderClick}
+          onCityClick={this.onCityClick}
         />
       );
     } else {
@@ -55,11 +69,11 @@ export class App extends PureComponent {
 }
 
 App.propTypes = {
-  quantity: PropTypes.number.isRequired,
   cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
