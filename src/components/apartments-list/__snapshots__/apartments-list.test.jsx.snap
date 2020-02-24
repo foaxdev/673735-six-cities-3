@@ -3,18 +3,23 @@
 exports[`Should render ApartmentsList item correctly 1`] = `
 Array [
   <article
-    className="cities__place-card place-card"
+    className="near-places__place-card place-card"
     onMouseOver={[Function]}
+    style={
+      Object {
+        "marginLeft": "8px",
+      }
+    }
   >
     <div
-      className="place-card__mark"
+      className="place-card__mark visually-hidden"
     >
       <span>
         Premium
       </span>
     </div>
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
         href="#"
@@ -113,8 +118,13 @@ Array [
     </div>
   </article>,
   <article
-    className="cities__place-card place-card"
+    className="near-places__place-card place-card"
     onMouseOver={[Function]}
+    style={
+      Object {
+        "marginLeft": "8px",
+      }
+    }
   >
     <div
       className="place-card__mark visually-hidden"
@@ -124,7 +134,7 @@ Array [
       </span>
     </div>
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
         href="#"
@@ -223,8 +233,13 @@ Array [
     </div>
   </article>,
   <article
-    className="cities__place-card place-card"
+    className="near-places__place-card place-card"
     onMouseOver={[Function]}
+    style={
+      Object {
+        "marginLeft": "8px",
+      }
+    }
   >
     <div
       className="place-card__mark visually-hidden"
@@ -234,7 +249,7 @@ Array [
       </span>
     </div>
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
         href="#"
@@ -333,18 +348,23 @@ Array [
     </div>
   </article>,
   <article
-    className="cities__place-card place-card"
+    className="near-places__place-card place-card"
     onMouseOver={[Function]}
+    style={
+      Object {
+        "marginLeft": "8px",
+      }
+    }
   >
     <div
-      className="place-card__mark"
+      className="place-card__mark visually-hidden"
     >
       <span>
         Premium
       </span>
     </div>
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
         href="#"

@@ -172,6 +172,11 @@ exports[`Should render Main screen correctly 1`] = `
           <article
             className="cities__place-card place-card"
             onMouseOver={[Function]}
+            style={
+              Object {
+                "marginLeft": "8px",
+              }
+            }
           >
             <div
               className="place-card__mark"
@@ -282,6 +287,11 @@ exports[`Should render Main screen correctly 1`] = `
           <article
             className="cities__place-card place-card"
             onMouseOver={[Function]}
+            style={
+              Object {
+                "marginLeft": "8px",
+              }
+            }
           >
             <div
               className="place-card__mark visually-hidden"
@@ -392,6 +402,11 @@ exports[`Should render Main screen correctly 1`] = `
           <article
             className="cities__place-card place-card"
             onMouseOver={[Function]}
+            style={
+              Object {
+                "marginLeft": "8px",
+              }
+            }
           >
             <div
               className="place-card__mark visually-hidden"
@@ -502,6 +517,11 @@ exports[`Should render Main screen correctly 1`] = `
           <article
             className="cities__place-card place-card"
             onMouseOver={[Function]}
+            style={
+              Object {
+                "marginLeft": "8px",
+              }
+            }
           >
             <div
               className="place-card__mark"

@@ -29,7 +29,12 @@ export class App extends PureComponent {
             {this._renderScreen()}
           </Route>
           <Route exact path="/offer">
-            <ApartmentDetailed offer={this.props.offers[0]}/>
+            <ApartmentDetailed
+              offer={this.props.offers[0]}
+              offersNearby={this.props.offersNearby}
+              onOfferCardHover={this.props.onOfferCardHover}
+              onOfferCardHeaderClick={this.onHeaderClick}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -49,7 +54,14 @@ export class App extends PureComponent {
         />
       );
     } else {
-      return (<ApartmentDetailed offer={this.props.offers[this.state.currentPage]}/>);
+      return (
+        <ApartmentDetailed
+          offer={this.props.offers[this.state.currentPage]}
+          offersNearby={this.props.offersNearby}
+          onOfferCardHover={this.props.onOfferCardHover}
+          onOfferCardHeaderClick={this.onHeaderClick}
+        />
+      );
     }
   }
 }
@@ -66,6 +78,48 @@ App.propTypes = {
     isFavourite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired
+    }).isRequired,
+    reviews: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          avatar: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          rating: PropTypes.number.isRequired,
+          date: PropTypes.number.isRequired,
+          text: PropTypes.string.isRequired
+        }).isRequired
+    ).isRequired
   })).isRequired,
-  onCardHover: PropTypes.func.isRequired
+  offersNearby: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavourite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    photoSrc: PropTypes.string.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired
+    }).isRequired,
+    reviews: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          avatar: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          rating: PropTypes.number.isRequired,
+          date: PropTypes.number.isRequired,
+          text: PropTypes.string.isRequired
+        }).isRequired
+    ).isRequired
+  })).isRequired,
+  onCardHover: PropTypes.func.isRequired,
+  onOfferCardHover: PropTypes.func.isRequired
 };

@@ -12,6 +12,7 @@ export const TEST_OFFER = {
   rating: 4,
   photoSrc: `img/apartment-01.jpg`
 };
+const TEST_MAIN_CLASS = `near-places`;
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -24,6 +25,8 @@ it(`Card should be hovered`, () => {
       <Apartment
         index={0}
         offer={TEST_OFFER}
+        mainClass={TEST_MAIN_CLASS}
+        showPremium={true}
         onCardHover={onCardHover}
         onHeaderClick={() => {}}
       />
@@ -40,6 +43,8 @@ it(`When click on apt preview its page should be rendered`, () => {
       <Apartment
         index={0}
         offer={TEST_OFFER}
+        mainClass={TEST_MAIN_CLASS}
+        showPremium={true}
         onCardHover={() => {}}
         onHeaderClick={onHeaderClick}
       />
