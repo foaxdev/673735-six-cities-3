@@ -12,7 +12,7 @@ export class Map extends PureComponent {
 
     const map = leaflet.map(`map`, {
       center: this.props.cityCoordinates,
-      zoom: 12,
+      zoom: 14,
       zoomControl: false,
       marker: true
     });
