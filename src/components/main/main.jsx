@@ -4,22 +4,21 @@ import {ApartmentsList} from "../apartments-list/apartments-list";
 import {Map} from "../map/map";
 import {CitiesList} from "../cities-list/cities-list";
 
-export const Main = ({quantity, cityCoordinates, offerCoordinates, offers, onCardHover, onHeaderClick, onCityClick}) => {
+export const Main = ({quantity, cityCoordinates, offerCoordinates, cities, currentCity, offers, onCardHover, onHeaderClick, onCityClick}) => {
   const coordinates = offers.map((offer) => offer.coordinates);
-  const cities = Array.from(new Set(offers.map((offer) => offer.city))).slice(0, 6);
 
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
       <section className="locations container">
-        <CitiesList cities={cities} onCityClick={onCityClick}/>
+        <CitiesList cities={cities} currentCity={currentCity} onCityClick={onCityClick}/>
       </section>
     </div>
     <div className="cities">
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{quantity} places to stay in Amsterdam</b>
+          <b className="places__found">{quantity} places to stay in {currentCity}</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <span className="places__sorting-type" tabIndex="0">
@@ -49,6 +48,8 @@ Main.propTypes = {
   quantity: PropTypes.number.isRequired,
   cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

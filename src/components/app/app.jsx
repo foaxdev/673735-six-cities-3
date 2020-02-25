@@ -11,10 +11,10 @@ export class App extends PureComponent {
 
     this.state = {
       currentPage: -1,
-      city: this.props.offers[0].city
+      city: this.props.currentCity
     };
     this.onHeaderClick = this.onHeaderClick.bind(this);
-    this.onCityClick = this.onCityClick(this);
+    this.onCityClick = this.onCityClick.bind(this);
   }
 
   onHeaderClick(newPage) {
@@ -38,7 +38,7 @@ export class App extends PureComponent {
           </Route>
           <Route exact path="/offer">
             <ApartmentDetailed
-              offer={this.props.offers[0]}
+              offer={this._getObjectDataByCity(this.state.city).offers[0]}
               offersNearby={this.props.offersNearby}
               onOfferCardHover={this.props.onOfferCardHover}
               onOfferCardHeaderClick={this.onHeaderClick}
@@ -49,19 +49,38 @@ export class App extends PureComponent {
     );
   }
 
+  _getObjectDataByCity(city) {
+    for (let i = 0; i < this.props.offers.length; i++) {
+      if (this.props.offers[i].city === city) {
+        return this.props.offers[i];
+      }
+    }
+
+    return null;
+  }
+
+  _getAllCities() {
+    const allCities = [];
+
+    for (let i = 0; i < this.props.offers.length; i++) {
+      allCities.push(this.props.offers[i].city);
+    }
+
+    return allCities;
+  }
+
   _renderScreen() {
     if (this.state.currentPage === -1) {
-      const availableCities = Array.from(new Set(this.props.offers.map((offer) => offer.city))).slice(0, 6);
-      const offersByCity = this.props.offers.map((offer) => offer.city === this.state.city);
-      const quantityOfOffersByCity = this.props.offers.map((offer) => offer.city === this.state.city).length;
+      const cityData = this._getObjectDataByCity(this.state.city);
 
       return (
         <Main
-          quantity={quantityOfOffersByCity}
-          cityCoordinates={this.props.cityCoordinates}
-          offerCoordinates={this.props.offerCoordinates}
-          cities={availableCities}
-          offers={offersByCity}
+          quantity={cityData.offers.length}
+          cityCoordinates={cityData.cityCoordinates}
+          offerCoordinates={cityData.markerCoordinates}
+          cities={this._getAllCities()}
+          currentCity={this.state.city}
+          offers={cityData.offers}
           onCardHover={this.props.onCardHover}
           onHeaderClick={this.onHeaderClick}
           onCityClick={this.onCityClick}
@@ -70,7 +89,7 @@ export class App extends PureComponent {
     } else {
       return (
         <ApartmentDetailed
-          offer={this.props.offers[this.state.currentPage]}
+          offer={this._getObjectDataByCity(this.state.city).offers[this.state.currentPage]}
           offersNearby={this.props.offersNearby}
           onOfferCardHover={this.props.onOfferCardHover}
           onOfferCardHeaderClick={this.onHeaderClick}
@@ -81,24 +100,26 @@ export class App extends PureComponent {
 }
 
 App.propTypes = {
-  cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavourite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    photoSrc: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-    host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired
-    }).isRequired,
-    reviews: PropTypes.arrayOf(
+    cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    markerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    offers: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      isPremium: PropTypes.bool.isRequired,
+      isFavourite: PropTypes.bool.isRequired,
+      rating: PropTypes.number.isRequired,
+      photoSrc: PropTypes.string.isRequired,
+      coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      host: PropTypes.shape({
+        avatar: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        isSuper: PropTypes.bool.isRequired
+      }).isRequired,
+      reviews: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,
           avatar: PropTypes.string.isRequired,
@@ -107,7 +128,8 @@ App.propTypes = {
           date: PropTypes.number.isRequired,
           text: PropTypes.string.isRequired
         }).isRequired
-    ).isRequired
+      ).isRequired
+    })).isRequired
   })).isRequired,
   offersNearby: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,

@@ -7,8 +7,6 @@ import {Provider} from "react-redux";
 import {reducer} from "./reducer";
 
 const HEADER_HOVER_CARD_HANDLER = () => {};
-const CITY_COORDINATES = [52.38333, 4.9];
-const OFFER_COORDINATES = [52.3709553943508, 4.89309666406198];
 
 const store = createStore(
   reducer,
@@ -18,8 +16,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <App
-      cityCoordinates={CITY_COORDINATES}
-      offerCoordinates={OFFER_COORDINATES}
+      currentCity={offers[0].city}
       offers={offers}
       offersNearby={offersNearby}
       onCardHover={HEADER_HOVER_CARD_HANDLER}
