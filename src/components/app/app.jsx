@@ -3,31 +3,10 @@ import {Main} from "../main/main";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {ApartmentDetailed} from "../apartment-detailed/apartment-detailed";
+import {ActionCreator} from "../../reducer";
+import {connect} from "react-redux";
 
 export class App extends PureComponent {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentPage: -1,
-      city: this.props.currentCity
-    };
-    this.onHeaderClick = this.onHeaderClick.bind(this);
-    this.onCityClick = this.onCityClick.bind(this);
-  }
-
-  onHeaderClick(newPage) {
-    this.setState({
-      currentPage: newPage
-    });
-  }
-
-  onCityClick(newCity) {
-    this.setState({
-      city: newCity
-    });
-  }
 
   render() {
     return (
@@ -38,10 +17,10 @@ export class App extends PureComponent {
           </Route>
           <Route exact path="/offer">
             <ApartmentDetailed
-              offer={this._getObjectDataByCity(this.state.city).offers[0]}
+              offer={this._getObjectDataByCity(this.props.currentCity).offers[0]}
               offersNearby={this.props.offersNearby}
               onOfferCardHover={this.props.onOfferCardHover}
-              onOfferCardHeaderClick={this.onHeaderClick}
+              onOfferCardHeaderClick={this.props.onHeaderClick}
             />
           </Route>
         </Switch>
@@ -70,11 +49,8 @@ export class App extends PureComponent {
   }
 
   _renderScreen() {
-    if (this.state.currentPage === -1) {
-      const cityData = this._getObjectDataByCity(this.state.city);
-
-      console.log(cityData.cityCoordinates);
-      console.log(cityData.markerCoordinates);
+    if (this.props.currentPage === -1) {
+      const cityData = this._getObjectDataByCity(this.props.currentCity);
 
       return (
         <Main
@@ -82,20 +58,20 @@ export class App extends PureComponent {
           cityCoordinates={cityData.cityCoordinates}
           markerCoordinates={cityData.markerCoordinates}
           cities={this._getAllCities()}
-          currentCity={this.state.city}
+          currentCity={this.props.currentCity}
           offers={cityData.offers}
           onCardHover={this.props.onCardHover}
-          onHeaderClick={this.onHeaderClick}
-          onCityClick={this.onCityClick}
+          onHeaderClick={this.props.onHeaderClick}
+          onCityClick={this.props.onCityClick}
         />
       );
     } else {
       return (
         <ApartmentDetailed
-          offer={this._getObjectDataByCity(this.state.city).offers[this.state.currentPage]}
+          offer={this._getObjectDataByCity(this.props.currentCity).offers[this.props.currentPage]}
           offersNearby={this.props.offersNearby}
           onOfferCardHover={this.props.onOfferCardHover}
-          onOfferCardHeaderClick={this.onHeaderClick}
+          onOfferCardHeaderClick={this.props.onHeaderClick}
         />
       );
     }
@@ -162,3 +138,27 @@ App.propTypes = {
   onCardHover: PropTypes.func.isRequired,
   onOfferCardHover: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  offersNearby: state.offersNearby,
+  currentPage: state.currentPage,
+  currentCity: state.currentCity
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onHeaderClick(newPage) {
+    dispatch(ActionCreator.changeCurrentPage(newPage));
+  },
+  onCityClick(newCity) {
+    dispatch(ActionCreator.changeCity(newCity));
+  },
+  onCardHover() {
+
+  },
+  onOfferCardHover() {
+
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

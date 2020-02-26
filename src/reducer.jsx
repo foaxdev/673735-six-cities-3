@@ -1,34 +1,55 @@
-import {offers} from "./mocks/offers";
+import {offers, offersNearby} from "./mocks/offers";
 import {extend} from "./utils/utils";
+import React from "react";
 
 const initialState = {
-  city: `Amsterdam`,
-  listOfOffers: offers
+  currentPage: -1,
+  currentCity: `Amsterdam`,
+  offers: offers,
+  offersNearby: offersNearby
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   GET_OFFERS_LIST: `GET_OFFERS_LIST`,
+  CHANGE_CURRENT_PAGE: `CHANGE_CURRENT_PAGE`
 };
 
-const ActionCreator = {
+export const ActionCreator = {
+  changeCurrentPage: (page) => ({
+    type: ActionType.CHANGE_CURRENT_PAGE,
+    payload: page
+  }),
+  changeCity: (city) => ({
+    type: ActionType.CHANGE_CITY,
+    payload: city
+  }),
   getOffersListByCity: (city) => ({
     type: ActionType.GET_OFFERS_LIST,
-    payload: offers.map((offer) => offer.city === city),
+    payload: getObjectDataByCity(city).offers.map((offer) => offer.city === city),
   })
 };
 
-export const reducer = (state = initialState, action) => {
+const getObjectDataByCity = (offers, city) => {
+  for (let i = 0; i < offers.length; i++) {
+    if (offers[i].city === city) {
+      return offers[i];
+    }
+  }
 
+  return null;
+};
+
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
-        city: action.payload,
+        currentCity: action.payload,
       });
 
     case ActionType.GET_OFFERS_LIST:
       return extend(state, {
-        listOfOffers: action.payload,
+        offers: getObjectDataByCity(this.state.offers, state.currentCity).offers,
       });
   }
 

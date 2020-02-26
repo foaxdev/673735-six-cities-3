@@ -1,12 +1,9 @@
 import ReactDOM from "react-dom";
 import React from "react";
-import {App} from "./components/app/app";
-import {offers, offersNearby} from "./mocks/offers";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import {reducer} from "./reducer";
-
-const HEADER_HOVER_CARD_HANDLER = () => {};
+import App from "./components/app/app";
 
 const store = createStore(
   reducer,
@@ -15,13 +12,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App
-      currentCity={offers[0].city}
-      offers={offers}
-      offersNearby={offersNearby}
-      onCardHover={HEADER_HOVER_CARD_HANDLER}
-      onOfferCardHover={HEADER_HOVER_CARD_HANDLER}
-    />,
+    <App />
   </Provider>,
   document.querySelector(`#root`)
 );
