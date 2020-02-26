@@ -73,11 +73,14 @@ export class App extends PureComponent {
     if (this.state.currentPage === -1) {
       const cityData = this._getObjectDataByCity(this.state.city);
 
+      console.log(cityData.cityCoordinates);
+      console.log(cityData.markerCoordinates);
+
       return (
         <Main
           quantity={cityData.offers.length}
           cityCoordinates={cityData.cityCoordinates}
-          offerCoordinates={cityData.markerCoordinates}
+          markerCoordinates={cityData.markerCoordinates}
           cities={this._getAllCities()}
           currentCity={this.state.city}
           offers={cityData.offers}

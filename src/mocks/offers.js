@@ -339,8 +339,8 @@ export const offers = [
   },
   {
     city: `Paris`,
-    cityCoordinates: [52.38333, 4.9],
-    markerCoordinates: [52.3709553943508, 4.89309666406198],
+    cityCoordinates: [48.8566, 2.3522],
+    markerCoordinates: [48,8566, 2.3522],
     offers: [
       {
         type: `hotel`,
@@ -415,8 +415,8 @@ export const offers = [
   },
   {
     city: `Cologne`,
-    cityCoordinates: [52.38333, 4.9],
-    markerCoordinates: [52.3709553943508, 4.89309666406198],
+    cityCoordinates: [50.9375, 6.9603],
+    markerCoordinates: [50.9375, 6.9603],
     offers: [
       {
         type: `hotel`,
@@ -491,8 +491,8 @@ export const offers = [
   },
   {
     city: `Brussels`,
-    cityCoordinates: [52.38333, 4.9],
-    markerCoordinates: [52.3709553943508, 4.89309666406198],
+    cityCoordinates: [50.8503, 4.3517],
+    markerCoordinates: [50.8503, 4.3517],
     offers: [
       {
         type: `hotel`,
@@ -567,8 +567,8 @@ export const offers = [
   },
   {
     city: `Hamburg`,
-    cityCoordinates: [52.38333, 4.9],
-    markerCoordinates: [52.3709553943508, 4.89309666406198],
+    cityCoordinates: [53.5511, 9.9937],
+    markerCoordinates: [53.5511, 9.9937],
     offers: [
       {
         type: `hotel`,
@@ -643,8 +643,8 @@ export const offers = [
   },
   {
     city: `Dusseldorf`,
-    cityCoordinates: [52.38333, 4.9],
-    markerCoordinates: [52.3709553943508, 4.89309666406198],
+    cityCoordinates: [51.2277, 6.7735],
+    markerCoordinates: [51.2277, 6.7735],
     offers: []
   }
 ];

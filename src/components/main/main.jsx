@@ -4,7 +4,7 @@ import {ApartmentsList} from "../apartments-list/apartments-list";
 import {Map} from "../map/map";
 import {CitiesList} from "../cities-list/cities-list";
 
-export const Main = ({quantity, cityCoordinates, offerCoordinates, cities, currentCity, offers, onCardHover, onHeaderClick, onCityClick}) => {
+export const Main = ({quantity, cityCoordinates, markerCoordinates, cities, currentCity, offers, onCardHover, onHeaderClick, onCityClick}) => {
   const coordinates = offers.map((offer) => offer.coordinates);
   const mainContainerClass = offers.length > 0 ? `cities__places-container container` : `cities__places-container cities__places-container--empty container`;
   const mainClass = offers.length > 0 ? `page__main page__main--index` : `page__main page__main--index page__main--index-empty`;
@@ -16,7 +16,7 @@ export const Main = ({quantity, cityCoordinates, offerCoordinates, cities, curre
         <CitiesList cities={cities} currentCity={currentCity} onCityClick={onCityClick}/>
       </section>
     </div>
-    <div className="cities">
+    <div className="cities" style={{minHeight: `85vh`}}>
       <div className={mainContainerClass}>
         {
           (offers.length > 0)
@@ -42,7 +42,7 @@ export const Main = ({quantity, cityCoordinates, offerCoordinates, cities, curre
                 <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} mainClass={`cities`} showPremium={true} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
               </section>
               <div className="cities__right-section">
-              <section className="cities__map map">{<Map cityCoordinates={cityCoordinates} availableOffers={coordinates} offerCoordinates={offerCoordinates}/>}</section>
+              <section className="cities__map map">{<Map cityCoordinates={cityCoordinates} availableOffers={coordinates} markerCoordinates={markerCoordinates}/>}</section>
             </div>
           </React.Fragment>
           : <React.Fragment>
@@ -63,7 +63,7 @@ export const Main = ({quantity, cityCoordinates, offerCoordinates, cities, curre
 Main.propTypes = {
   quantity: PropTypes.number.isRequired,
   cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  offerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  markerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
