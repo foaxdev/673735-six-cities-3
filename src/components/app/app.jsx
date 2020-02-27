@@ -15,14 +15,6 @@ export class App extends PureComponent {
           <Route exact path="/">
             {this._renderScreen()}
           </Route>
-          <Route exact path="/offer">
-            <ApartmentDetailed
-              offer={this._getObjectDataByCity(this.props.currentCity).offers[0]}
-              offersNearby={this.props.offersNearby}
-              onOfferCardHover={this.props.onOfferCardHover}
-              onOfferCardHeaderClick={this.props.onHeaderClick}
-            />
-          </Route>
         </Switch>
       </BrowserRouter>
     );
