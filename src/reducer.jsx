@@ -23,10 +23,6 @@ export const ActionCreator = {
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city
-  }),
-  getOffersListByCity: (city) => ({
-    type: ActionType.GET_OFFERS_LIST,
-    payload: getObjectDataByCity(city).offers.map((offer) => offer.city === city),
   })
 };
 
@@ -45,6 +41,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return extend(state, {
         currentCity: action.payload,
+      });
+
+    case ActionType.CHANGE_CURRENT_PAGE:
+      return extend(state, {
+        currentPage: action.payload
       });
 
     case ActionType.GET_OFFERS_LIST:
