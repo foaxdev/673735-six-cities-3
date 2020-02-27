@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Map} from "./map";
 
 const CITY = [52.38333, 4.9];
-const OFFER_COORDINATES = [52.3709553943508, 4.89309666406198];
+const MARKER_COORDINATES = [52.3709553943508, 4.89309666406198];
 const AVAILABLE_OFFERS = [
   [52.3909553943508, 4.85309666406198],
   [52.369553943508, 4.85309666406198],
@@ -16,7 +16,7 @@ it(`Should render main Map correctly`, () => {
     .create(<Map
       cityCoordinates={CITY}
       availableOffers={AVAILABLE_OFFERS}
-      offerCoordinates={OFFER_COORDINATES}
+      markerCoordinates={MARKER_COORDINATES}
     />)
     .toJSON();
 

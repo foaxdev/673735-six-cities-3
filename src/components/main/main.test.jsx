@@ -2,7 +2,6 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Main} from "./main";
 
-const TEST_OFFERS_QUANTITY = 500;
 export const TEST_OFFERS = [
   {
     type: `apartment`,
@@ -336,22 +335,27 @@ export const TEST_OFFERS = [
     ]
   }
 ];
-const TEST_CARD_HOVER_HANDLER = () => {};
-const TEST_HEADER_CLICK_HANDLER = () => {};
+const TEST_HANDLER = () => {};
 const TEST_CITY_COORDINATES = [52.38333, 4.9];
-const TEST_OFFER_COORDINATES = [52.3709553943508, 4.89309666406198];
+const TEST_MARKER_COORDINATES = [52.3709553943508, 4.89309666406198];
+const TEST_CURRENT_CITY = `Amsterdam`;
+const TEST_CITIES = [`Amsterdam`, `Paris`, `Berlin`, `Korea`, `Japan`];
 
 it(`Should render Main screen correctly`, () => {
   const tree = renderer
-    .create(<Main
-      quantity={TEST_OFFERS_QUANTITY}
-      cityCoordinates={TEST_CITY_COORDINATES}
-      offerCoordinates={TEST_OFFER_COORDINATES}
-      offers={TEST_OFFERS}
-      onCardHover={TEST_CARD_HOVER_HANDLER}
-      onHeaderClick={TEST_HEADER_CLICK_HANDLER}
-    />)
-    .toJSON();
+    .create(
+        <Main
+          currentCity={TEST_CURRENT_CITY}
+          markerCoordinates={TEST_MARKER_COORDINATES}
+          onCityClick={TEST_HANDLER}
+          cities={TEST_CITIES}
+          onCardHover={TEST_HANDLER}
+          quantity={TEST_CITIES.length}
+          offers={TEST_OFFERS}
+          onHeaderClick={TEST_HANDLER}
+          cityCoordinates={TEST_CITY_COORDINATES}
+        />
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

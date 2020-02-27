@@ -340,7 +340,7 @@ export const offers = [
   {
     city: `Paris`,
     cityCoordinates: [48.8566, 2.3522],
-    markerCoordinates: [48,8566, 2.3522],
+    markerCoordinates: [48.8566, 2.3522],
     offers: [
       {
         type: `hotel`,

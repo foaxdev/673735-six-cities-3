@@ -1,12 +1,11 @@
 import {offers, offersNearby} from "./mocks/offers";
 import {extend} from "./utils/utils";
-import React from "react";
 
 const initialState = {
   currentPage: -1,
   currentCity: `Amsterdam`,
-  offers: offers,
-  offersNearby: offersNearby
+  offers,
+  offersNearby
 };
 
 const ActionType = {
@@ -26,10 +25,10 @@ export const ActionCreator = {
   })
 };
 
-const getObjectDataByCity = (offers, city) => {
-  for (let i = 0; i < offers.length; i++) {
-    if (offers[i].city === city) {
-      return offers[i];
+const getObjectDataByCity = (allOffers, city) => {
+  for (let i = 0; i < allOffers.length; i++) {
+    if (allOffers[i].city === city) {
+      return allOffers[i];
     }
   }
 
@@ -50,7 +49,7 @@ export const reducer = (state = initialState, action) => {
 
     case ActionType.GET_OFFERS_LIST:
       return extend(state, {
-        offers: getObjectDataByCity(this.state.offers, state.currentCity).offers,
+        offers: getObjectDataByCity(state.offers, state.currentCity).offers,
       });
   }
 

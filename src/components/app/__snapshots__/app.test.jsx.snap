@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render Apartment item correctly 1`] = `
+exports[`Should render App screen correctly 1`] = `
 <main
   className="page__main page__main--index"
 >
@@ -22,43 +22,9 @@ exports[`Should render Apartment item correctly 1`] = `
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Paris
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Cologne
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Brussels
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
             className="locations__item-link tabs__item tabs__item--active"
+            href="#"
+            onClick={[Function]}
           >
             <span>
               Amsterdam
@@ -71,6 +37,46 @@ exports[`Should render Apartment item correctly 1`] = `
           <a
             className="locations__item-link tabs__item"
             href="#"
+            onClick={[Function]}
+          >
+            <span>
+              Paris
+            </span>
+          </a>
+        </li>
+        <li
+          className="locations__item"
+        >
+          <a
+            className="locations__item-link tabs__item"
+            href="#"
+            onClick={[Function]}
+          >
+            <span>
+              Cologne
+            </span>
+          </a>
+        </li>
+        <li
+          className="locations__item"
+        >
+          <a
+            className="locations__item-link tabs__item"
+            href="#"
+            onClick={[Function]}
+          >
+            <span>
+              Brussels
+            </span>
+          </a>
+        </li>
+        <li
+          className="locations__item"
+        >
+          <a
+            className="locations__item-link tabs__item"
+            href="#"
+            onClick={[Function]}
           >
             <span>
               Hamburg
@@ -83,6 +89,7 @@ exports[`Should render Apartment item correctly 1`] = `
           <a
             className="locations__item-link tabs__item"
             href="#"
+            onClick={[Function]}
           >
             <span>
               Dusseldorf
@@ -94,6 +101,11 @@ exports[`Should render Apartment item correctly 1`] = `
   </div>
   <div
     className="cities"
+    style={
+      Object {
+        "minHeight": "85vh",
+      }
+    }
   >
     <div
       className="cities__places-container container"
@@ -109,8 +121,9 @@ exports[`Should render Apartment item correctly 1`] = `
         <b
           className="places__found"
         >
-          500
-           places to stay in Amsterdam
+          4
+           places to stay in 
+          Amsterdam
         </b>
         <form
           action="#"

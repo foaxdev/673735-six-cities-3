@@ -80,6 +80,7 @@ export class App extends PureComponent {
 
 App.propTypes = {
   currentCity: PropTypes.string.isRequired,
+  currentPage: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     city: PropTypes.string.isRequired,
     cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
@@ -99,14 +100,14 @@ App.propTypes = {
         isSuper: PropTypes.bool.isRequired
       }).isRequired,
       reviews: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          avatar: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          rating: PropTypes.number.isRequired,
-          date: PropTypes.number.isRequired,
-          text: PropTypes.string.isRequired
-        }).isRequired
+          PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            avatar: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            rating: PropTypes.number.isRequired,
+            date: PropTypes.number.isRequired,
+            text: PropTypes.string.isRequired
+          }).isRequired
       ).isRequired
     })).isRequired
   })).isRequired,
@@ -136,7 +137,9 @@ App.propTypes = {
     ).isRequired
   })).isRequired,
   onCardHover: PropTypes.func.isRequired,
-  onOfferCardHover: PropTypes.func.isRequired
+  onOfferCardHover: PropTypes.func.isRequired,
+  onHeaderClick: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
