@@ -8,9 +8,8 @@ const initialState = {
   offersNearby
 };
 
-const ActionType = {
+export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  GET_OFFERS_LIST: `GET_OFFERS_LIST`,
   CHANGE_CURRENT_PAGE: `CHANGE_CURRENT_PAGE`
 };
 
@@ -25,31 +24,16 @@ export const ActionCreator = {
   })
 };
 
-const getObjectDataByCity = (allOffers, city) => {
-  for (let i = 0; i < allOffers.length; i++) {
-    if (allOffers[i].city === city) {
-      return allOffers[i];
-    }
-  }
-
-  return null;
-};
-
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
-        currentCity: action.payload,
+        currentCity: action.payload ? action.payload : state.currentCity,
       });
 
     case ActionType.CHANGE_CURRENT_PAGE:
       return extend(state, {
-        currentPage: action.payload
-      });
-
-    case ActionType.GET_OFFERS_LIST:
-      return extend(state, {
-        offers: getObjectDataByCity(state.offers, state.currentCity).offers,
+        currentPage: action.payload ? action.payload : state.currentPage
       });
   }
 
