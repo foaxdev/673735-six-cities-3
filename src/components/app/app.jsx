@@ -8,18 +8,6 @@ import {connect} from "react-redux";
 
 export class App extends PureComponent {
 
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderScreen()}
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-
   _getObjectDataByCity(city) {
     for (let i = 0; i < this.props.offers.length; i++) {
       if (this.props.offers[i].city === city) {
@@ -31,13 +19,7 @@ export class App extends PureComponent {
   }
 
   _getAllCities() {
-    const allCities = [];
-
-    for (let i = 0; i < this.props.offers.length; i++) {
-      allCities.push(this.props.offers[i].city);
-    }
-
-    return allCities;
+    return this.props.offers.map(offer => offer.city);
   }
 
   _renderScreen() {
@@ -67,6 +49,18 @@ export class App extends PureComponent {
         />
       );
     }
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderScreen()}
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
   }
 }
 

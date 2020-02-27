@@ -28,12 +28,12 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
-        currentCity: action.payload ? action.payload : state.currentCity,
+        currentCity: action.payload || state.currentCity,
       });
 
     case ActionType.CHANGE_CURRENT_PAGE:
       return extend(state, {
-        currentPage: action.payload ? action.payload : state.currentPage
+        currentPage: action.payload || state.currentPage
       });
   }
 
