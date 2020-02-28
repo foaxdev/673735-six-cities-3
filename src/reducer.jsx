@@ -8,23 +8,20 @@ const SORT_TYPES = {
   PRICE_TOP_FIRST: `Top rated first`
 };
 
-const getObjectDataByCity = (city) => {
-  for (let i = 0; i < offers.length; i++) {
-    if (offers[i].city === city) {
-      return offers[i];
+export const getObjectDataByCity = (city, allOffers) => {
+  for (let i = 0; i < allOffers.length; i++) {
+    if (allOffers[i].city === city) {
+      return allOffers[i];
     }
   }
 
   return null;
 };
 
-const sortOffers = (city, sortType) => {
-  const offersByCity = getObjectDataByCity(city).offers;
+export const sortOffers = (city, sortType, allOffers) => {
+  const offersByCity = getObjectDataByCity(city, allOffers).offers;
 
   switch (sortType) {
-    case SORT_TYPES.POPULAR:
-      return offersByCity;
-
     case SORT_TYPES.PRICE_FROM_LOW:
       return [...offersByCity].sort((a, b) => a.price - b.price);
 
@@ -33,6 +30,9 @@ const sortOffers = (city, sortType) => {
 
     case SORT_TYPES.PRICE_TOP_FIRST:
       return [...offersByCity].sort((a, b) => b.rating - a.rating);
+
+    default:
+      return offersByCity;
   }
 };
 
@@ -41,18 +41,18 @@ const initialState = {
   currentSortType: `Popular`,
   currentPage: -1,
   currentCity: `Amsterdam`,
-  currentCityCoordinates: getObjectDataByCity(`Amsterdam`).cityCoordinates,
-  currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`).markerCoordinates,
-  cities: offers.map(offer => offer.city),
+  currentCityCoordinates: getObjectDataByCity(`Amsterdam`, offers).cityCoordinates,
+  currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`, offers).markerCoordinates,
+  cities: offers.map((offer) => offer.city),
   mainApartmentClass: `cities`,
   showPremiumBadge: true,
   detailedOffer: {},
   detailedOfferReviews: [],
   offers,
   offersNearby,
-  offersByCityQuantity: getObjectDataByCity(`Amsterdam`).offers.length,
-  offersByCity: getObjectDataByCity(`Amsterdam`).offers,
-  coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`).offers.map((offer) => offer.coordinates)
+  offersByCityQuantity: getObjectDataByCity(`Amsterdam`, offers).offers.length,
+  offersByCity: getObjectDataByCity(`Amsterdam`, offers).offers,
+  coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, offers).offers.map((offer) => offer.coordinates)
 };
 
 export const ActionType = {
@@ -86,11 +86,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return extend(state, {
         currentCity: action.payload || state.currentCity,
-        offersByCity: sortOffers(action.payload || state.currentCity, state.currentSortType),
-        offersByCityQuantity: getObjectDataByCity(action.payload || state.currentCity).offers.length,
-        coordinatesOfOffersByCity: getObjectDataByCity(action.payload || state.currentCity).offers.map((offer) => offer.coordinates),
-        currentCityCoordinates: getObjectDataByCity(action.payload || state.currentCity).cityCoordinates,
-        currentCityMarkerCoordinates: getObjectDataByCity(action.payload || state.currentCity).markerCoordinates
+        offersByCity: sortOffers(action.payload || state.currentCity, state.currentSortType, state.offers),
+        offersByCityQuantity: getObjectDataByCity(action.payload || state.currentCity, state.offers).offers.length,
+        coordinatesOfOffersByCity: getObjectDataByCity(action.payload || state.currentCity, state.offers).offers.map((offer) => offer.coordinates),
+        currentCityCoordinates: getObjectDataByCity(action.payload || state.currentCity, state.offers).cityCoordinates,
+        currentCityMarkerCoordinates: getObjectDataByCity(action.payload || state.currentCity, state.offers).markerCoordinates
       });
 
     case ActionType.CHANGE_CURRENT_PAGE:
@@ -98,12 +98,12 @@ export const reducer = (state = initialState, action) => {
         currentPage: action.payload !== null ? action.payload : state.currentPage,
         offersByCity: action.payload !== null && action.payload !== -1 ? state.offersNearby : state.offersByCity,
         mainApartmentClass: action.payload !== null && action.payload !== -1 ? `near-places` : `cities`,
-        showPremiumBadge: action.payload !== null && action.payload === -1,
+        showPremiumBadge: action.payload === null || action.payload === -1,
         coordinatesOfOffersByCity: offersNearby.map((a) => a.coordinates),
-        detailedOffer: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload] : {},
-        currentCityCoordinates: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload].coordinates : [],
-        currentCityMarkerCoordinates: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload].coordinates : [],
-        detailedOfferReviews: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload].reviews : []
+        detailedOffer: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity, state.offers).offers[action.payload] : {},
+        currentCityCoordinates: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity, state.offers).offers[action.payload].coordinates : [],
+        currentCityMarkerCoordinates: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity, state.offers).offers[action.payload].coordinates : [],
+        detailedOfferReviews: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity, state.offers).offers[action.payload].reviews : []
       });
 
     case ActionType.TOGGLE_SORT:
@@ -115,7 +115,7 @@ export const reducer = (state = initialState, action) => {
       return extend(state, {
         currentSortType: action.payload || state.currentSortType,
         isSortOpened: false,
-        offersByCity: sortOffers(state.currentCity, action.payload || state.currentSortType)
+        offersByCity: sortOffers(state.currentCity, action.payload || state.currentSortType, state.offers)
       });
   }
 

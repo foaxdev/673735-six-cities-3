@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Main} from "./main";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 export const TEST_OFFERS = [
   {
@@ -335,26 +339,40 @@ export const TEST_OFFERS = [
     ]
   }
 ];
-const TEST_HANDLER = () => {};
-const TEST_CITY_COORDINATES = [52.38333, 4.9];
-const TEST_MARKER_COORDINATES = [52.3709553943508, 4.89309666406198];
+
 const TEST_CURRENT_CITY = `Amsterdam`;
-const TEST_CITIES = [`Amsterdam`, `Paris`, `Berlin`, `Korea`, `Japan`];
+const TEST_CITIES = [`Japan`, `Korea`, `China`];
+const TEST_CURRENT_CITY_COORDINATES = [52.38333, 4.9];
+const TEST_COORDINATES_OF_OFFERS_BY_CITY = [
+  [52.3909553943508, 4.85309666406198],
+  [52.369553943508, 4.85309666406198],
+  [52.3909553943508, 4.929309666406198],
+  [52.3809553943508, 4.939309666406198]
+];
+const TEST_CURRENT_CITY_MARKER_COORDINATES = [52.3709553943508, 4.89309666406198];
 
 it(`Should render Main screen correctly`, () => {
+  const store = mockStore({
+    offersByCityQuantity: 10,
+    currentCity: TEST_CURRENT_CITY,
+    cities: TEST_CITIES,
+    isSortOpened: false,
+    currentSortType: `Popular`,
+    offersByCity: TEST_OFFERS,
+    currentCityCoordinates: TEST_CURRENT_CITY_COORDINATES,
+    coordinatesOfOffersByCity: TEST_COORDINATES_OF_OFFERS_BY_CITY,
+    currentCityMarkerCoordinates: TEST_CURRENT_CITY_MARKER_COORDINATES,
+    showPremiumBadge: true,
+    mainApartmentClass: `cities`
+  });
+
   const tree = renderer
     .create(
-        <Main
-          currentCity={TEST_CURRENT_CITY}
-          markerCoordinates={TEST_MARKER_COORDINATES}
-          onCityClick={TEST_HANDLER}
-          cities={TEST_CITIES}
-          onCardHover={TEST_HANDLER}
-          quantity={TEST_CITIES.length}
-          offers={TEST_OFFERS}
-          onHeaderClick={TEST_HANDLER}
-          cityCoordinates={TEST_CITY_COORDINATES}
-        />
+        <Provider store={store}>
+          <Main
+            offersByCityQuantity={10}
+            currentCity={TEST_CURRENT_CITY}/>
+        </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

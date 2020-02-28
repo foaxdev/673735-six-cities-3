@@ -29,8 +29,8 @@ export class SortVariants extends PureComponent {
             const sortTypeClass = this.props.currentSortType === sortType ? `places__option places__option--active` : `places__option`;
             return (
               <li key={`sortType-${i}`} className={sortTypeClass} tabIndex="0" onClick={() => this.props.onSortTypeClick(sortType)}>{sortType}</li>
-            );})
-          }
+            );
+          })}
         </ul>
       </form>
     );

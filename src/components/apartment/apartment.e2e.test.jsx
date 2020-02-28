@@ -13,6 +13,7 @@ export const TEST_OFFER = {
   photoSrc: `img/apartment-01.jpg`
 };
 const TEST_MAIN_CLASS = `near-places`;
+const TEST_HANDLER = () => {};
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -23,13 +24,12 @@ it(`Card should be hovered`, () => {
 
   const apartmentBlock = shallow(
       <Apartment
-        index={0}
-        offer={TEST_OFFER}
-        mainClass={TEST_MAIN_CLASS}
-        showPremium={true}
         onCardHover={onCardHover}
-        onHeaderClick={() => {}}
-      />
+        offer={TEST_OFFER}
+        showPremiumBadge={false}
+        index={0}
+        onHeaderClick={TEST_HANDLER}
+        mainApartmentClass={TEST_MAIN_CLASS}/>
   );
 
   apartmentBlock.props().onMouseOver();
@@ -41,13 +41,12 @@ it(`When click on apt preview its page should be rendered`, () => {
 
   const apartmentBlock = shallow(
       <Apartment
-        index={0}
+        onCardHover={TEST_HANDLER}
         offer={TEST_OFFER}
-        mainClass={TEST_MAIN_CLASS}
-        showPremium={true}
-        onCardHover={() => {}}
+        showPremiumBadge={false}
+        index={0}
         onHeaderClick={onHeaderClick}
-      />
+        mainApartmentClass={TEST_MAIN_CLASS}/>
   );
 
   const header = apartmentBlock.find(`.place-card__link`);

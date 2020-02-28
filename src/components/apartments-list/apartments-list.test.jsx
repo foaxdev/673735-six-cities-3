@@ -1,6 +1,10 @@
 import renderer from "react-test-renderer";
 import React from "react";
 import {ApartmentsList} from "./apartments-list";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 export const TEST_OFFERS = [
   {
@@ -335,20 +339,37 @@ export const TEST_OFFERS = [
     ]
   }
 ];
-const TEST_CARD_HOVER_HANDLER = () => {};
-const TEST_HEADER_CLICK_HANDLER = () => {};
-const TEST_MAIN_CLASS = `near-places`;
 
-it(`Should render ApartmentsList item correctly`, () => {
+it(`Should render ApartmentsList on the main page correctly`, () => {
+  const store = mockStore({
+    offersByCity: TEST_OFFERS,
+    showPremiumBadge: true,
+    mainApartmentClass: `cities`
+  });
+
   const tree = renderer
-    .create(<ApartmentsList
-      offers={TEST_OFFERS}
-      showPremium={false}
-      mainClass={TEST_MAIN_CLASS}
-      onCardHover={TEST_CARD_HOVER_HANDLER}
-      onHeaderClick={TEST_HEADER_CLICK_HANDLER}
-    />)
-    .toJSON();
+    .create(
+        <Provider store={store}>
+          <ApartmentsList offersByCity={TEST_OFFERS}/>
+        </Provider>
+    ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Should render ApartmentsList on the detailed page correctly`, () => {
+  const store = mockStore({
+    offersByCity: TEST_OFFERS,
+    showPremiumBadge: false,
+    mainApartmentClass: `near-places`
+  });
+
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <ApartmentsList offersByCity={TEST_OFFERS}/>
+        </Provider>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

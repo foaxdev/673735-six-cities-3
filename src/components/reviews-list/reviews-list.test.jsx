@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {ReviewsList} from "./reviews-list";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 const TEST_REVIEWS = [
   {
@@ -102,9 +106,16 @@ const TEST_REVIEWS = [
 ];
 
 it(`Should render Reviews List correctly`, () => {
+  const store = mockStore({
+    detailedOfferReviews: TEST_REVIEWS
+  });
+
   const tree = renderer
-    .create(<ReviewsList reviews={TEST_REVIEWS}/>)
-    .toJSON();
+    .create(
+        <Provider store={store}>
+          <ReviewsList detailedOfferReviews={TEST_REVIEWS}/>
+        </Provider>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
