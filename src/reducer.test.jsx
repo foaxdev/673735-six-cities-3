@@ -1,12 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import {App} from "./app";
+import {ActionCreator, ActionType, reducer} from "./reducer";
 
-const mockStore = configureStore([]);
-
-export const TEST_OFFERS = [
+const TEST_OFFERS = [
   {
     city: `Amsterdam`,
     cityCoordinates: [52.38333, 4.9],
@@ -866,32 +860,126 @@ const TEST_OFFERS_NEARBY = [
     ]
   }
 ];
-const TEST_HANDLER = () => {};
-const TEST_CURRENT_PAGE = -1;
-const TEST_CURRENT_CITY = `Amsterdam`;
 
-it(`Should render App screen correctly`, () => {
-  const store = mockStore({
-    currentPage: TEST_CURRENT_PAGE,
-    currentCity: TEST_CURRENT_CITY,
+
+it(`Reducer without additional parameters should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  });
+});
+
+it(`Reducer should change city by a given value`, () => {
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  }, {
+    type: ActionType.CHANGE_CITY,
+    payload: `Japan`,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Japan`,
     offers: TEST_OFFERS,
     offersNearby: TEST_OFFERS_NEARBY
   });
 
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            currentCity={TEST_CURRENT_CITY}
-            currentPage={TEST_CURRENT_PAGE}
-            offers={TEST_OFFERS}
-            offersNearby={TEST_OFFERS_NEARBY}
-            onCardHover={TEST_HANDLER}
-            onOfferCardHover={TEST_HANDLER}
-            onHeaderClick={TEST_HANDLER}
-            onCityClick={TEST_HANDLER}/>
-        </Provider>
-    ).toJSON();
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  }, {
+    type: ActionType.CHANGE_CITY,
+    payload: `Amsterdam`,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  });
+});
 
-  expect(tree).toMatchSnapshot();
+it(`Reducer should change current page by a given value`, () => {
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  }, {
+    type: ActionType.CHANGE_CURRENT_PAGE,
+    payload: 1,
+  })).toEqual({
+    currentPage: 1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  });
+
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  }, {
+    type: ActionType.CHANGE_CURRENT_PAGE,
+    payload: -1,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  });
+});
+
+it(`Reducer should return default`, () => {
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  }, {
+    type: ActionType.CHANGE_CITY,
+    payload: null,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  });
+
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  }, {
+    type: ActionType.CHANGE_CURRENT_PAGE,
+    payload: null,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY
+  });
+});
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creator for change city returns correct action`, () => {
+    expect(ActionCreator.changeCity(`Japan`)).toEqual({
+      type: ActionType.CHANGE_CITY,
+      payload: `Japan`,
+    });
+  });
+
+  it(`Action creator for change current page return correct action`, () => {
+    expect(ActionCreator.changeCurrentPage(0))
+      .toEqual({
+        type: ActionType.CHANGE_CURRENT_PAGE,
+        payload: 0,
+      });
+  });
 });

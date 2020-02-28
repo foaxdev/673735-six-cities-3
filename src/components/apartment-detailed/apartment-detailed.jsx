@@ -142,7 +142,7 @@ export const ApartmentDetailed = (props) => {
           </section>
         </div>
       </div>
-      <section className="property__map map"><Map cityCoordinates={coordinates} availableOffers={props.offersNearby.map((a) => a.coordinates)} offerCoordinates={coordinates}/></section>
+      <section className="property__map map"><Map cityCoordinates={coordinates} availableOffers={props.offersNearby.map((a) => a.coordinates)} markerCoordinates={coordinates}/></section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
