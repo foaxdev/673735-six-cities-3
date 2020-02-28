@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Review} from "../review/review";
+import {connect} from "react-redux";
 
-export const ReviewsList = ({reviews}) => {
-  reviews.sort((a, b) => b.date - a.date);
+export const ReviewsList = ({detailedOfferReviews}) => {
+  detailedOfferReviews.sort((a, b) => b.date - a.date);
 
-  const reviewsList = reviews.slice(0, 10).map((review, index) =>
+  const reviewsList = detailedOfferReviews.slice(0, 10).map((review, index) =>
     <Review
       key={review.text + index}
       id={review.id}
@@ -25,7 +26,7 @@ export const ReviewsList = ({reviews}) => {
 };
 
 ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(
+  detailedOfferReviews: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         avatar: PropTypes.string.isRequired,
@@ -36,3 +37,9 @@ ReviewsList.propTypes = {
       }).isRequired
   ).isRequired
 };
+
+const mapStateToProps = (state) => ({
+  detailedOfferReviews: state.detailedOfferReviews
+});
+
+export default connect(mapStateToProps)(ReviewsList);

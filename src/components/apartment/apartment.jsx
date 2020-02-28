@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {ActionCreator} from "../../reducer";
+import {connect} from "react-redux";
 
-export const Apartment = ({index, offer, mainClass, showPremium, onCardHover, onHeaderClick}) => {
+export const Apartment = ({index, offer, mainApartmentClass, showPremiumBadge, onCardHover, onHeaderClick}) => {
   const {type, price, title, isPremium, rating, photoSrc} = offer;
   const ratingPercentage = `${Math.floor(rating * 100 / 5)}%`;
-  const premiumClass = isPremium && showPremium ? `place-card__mark` : `place-card__mark visually-hidden`;
-  const articleClass = `${mainClass}__place-card place-card`;
-  const imageWrapClass = `${mainClass}__image-wrapper place-card__image-wrapper`;
+  const premiumClass = isPremium && showPremiumBadge ? `place-card__mark` : `place-card__mark visually-hidden`;
+  const articleClass = `${mainApartmentClass}__place-card place-card`;
+  const imageWrapClass = `${mainApartmentClass}__image-wrapper place-card__image-wrapper`;
 
   return (
     <article className={articleClass} onMouseOver={onCardHover} style={{marginLeft: `8px`}}>
@@ -57,8 +59,24 @@ Apartment.propTypes = {
     rating: PropTypes.number.isRequired,
     photoSrc: PropTypes.string.isRequired,
   }).isRequired,
-  showPremium: PropTypes.bool.isRequired,
-  mainClass: PropTypes.string.isRequired,
+  showPremiumBadge: PropTypes.bool.isRequired,
+  mainApartmentClass: PropTypes.string.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  mainApartmentClass: state.mainApartmentClass,
+  showPremiumBadge: state.showPremiumBadge
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCardHover() {
+
+  },
+  onHeaderClick(newPage) {
+    dispatch(ActionCreator.changeCurrentPage(newPage));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Apartment);

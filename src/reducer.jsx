@@ -41,6 +41,13 @@ const initialState = {
   currentSortType: `Popular`,
   currentPage: -1,
   currentCity: `Amsterdam`,
+  currentCityCoordinates: getObjectDataByCity(`Amsterdam`).cityCoordinates,
+  currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`).markerCoordinates,
+  cities: offers.map(offer => offer.city),
+  mainApartmentClass: `cities`,
+  showPremiumBadge: true,
+  detailedOffer: {},
+  detailedOfferReviews: [],
   offers,
   offersNearby,
   offersByCityQuantity: getObjectDataByCity(`Amsterdam`).offers.length,
@@ -79,14 +86,24 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return extend(state, {
         currentCity: action.payload || state.currentCity,
-        offersByCity: getObjectDataByCity(action.payload || state.currentCity).offers,
+        offersByCity: sortOffers(action.payload || state.currentCity, state.currentSortType),
         offersByCityQuantity: getObjectDataByCity(action.payload || state.currentCity).offers.length,
-        coordinatesOfOffersByCity: getObjectDataByCity(action.payload || state.currentCity).offers.map((offer) => offer.coordinates)
+        coordinatesOfOffersByCity: getObjectDataByCity(action.payload || state.currentCity).offers.map((offer) => offer.coordinates),
+        currentCityCoordinates: getObjectDataByCity(action.payload || state.currentCity).cityCoordinates,
+        currentCityMarkerCoordinates: getObjectDataByCity(action.payload || state.currentCity).markerCoordinates
       });
 
     case ActionType.CHANGE_CURRENT_PAGE:
       return extend(state, {
-        currentPage: action.payload || state.currentPage
+        currentPage: action.payload !== null ? action.payload : state.currentPage,
+        offersByCity: action.payload !== null && action.payload !== -1 ? state.offersNearby : state.offersByCity,
+        mainApartmentClass: action.payload !== null && action.payload !== -1 ? `near-places` : `cities`,
+        showPremiumBadge: action.payload !== null && action.payload === -1,
+        coordinatesOfOffersByCity: offersNearby.map((a) => a.coordinates),
+        detailedOffer: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload] : {},
+        currentCityCoordinates: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload].coordinates : [],
+        currentCityMarkerCoordinates: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload].coordinates : [],
+        detailedOfferReviews: action.payload !== null && action.payload !== -1 ? getObjectDataByCity(state.currentCity).offers[action.payload].reviews : []
       });
 
     case ActionType.TOGGLE_SORT:

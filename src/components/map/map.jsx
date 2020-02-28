@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
+import {connect} from "react-redux";
 
 export class Map extends PureComponent {
 
@@ -34,12 +35,12 @@ export class Map extends PureComponent {
     });
 
     this._map = leaflet.map(`map`, {
-      center: this.props.cityCoordinates,
+      center: this.props.currentCityCoordinates,
       zoom: 14,
       zoomControl: false,
       marker: true
     });
-    this._map.setView(this.props.cityCoordinates, 12);
+    this._map.setView(this.props.currentCityCoordinates, 12);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -48,21 +49,29 @@ export class Map extends PureComponent {
       .addTo(this._map);
 
     leaflet
-      .marker(this.props.markerCoordinates, {icon})
+      .marker(this.props.currentCityMarkerCoordinates, {icon})
       .addTo(this._map);
 
-    for (let i = 0; i < this.props.availableOffers.length; i++) {
+    for (let i = 0; i < this.props.coordinatesOfOffersByCity.length; i++) {
       leaflet
-        .marker([this.props.availableOffers[i][0], this.props.availableOffers[i][1]])
+        .marker([this.props.coordinatesOfOffersByCity[i][0], this.props.coordinatesOfOffersByCity[i][1]])
         .addTo(this._map);
     }
   }
 }
 
 Map.propTypes = {
-  cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  availableOffers: PropTypes.arrayOf(
+  currentCityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  coordinatesOfOffersByCity: PropTypes.arrayOf(
       PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
   ).isRequired,
-  markerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+  currentCityMarkerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
 };
+
+const mapStateToProps = (state) => ({
+  currentCityCoordinates: state.currentCityCoordinates,
+  currentCityMarkerCoordinates: state.currentCityMarkerCoordinates,
+  coordinatesOfOffersByCity: state.coordinatesOfOffersByCity
+});
+
+export default connect(mapStateToProps)(Map);

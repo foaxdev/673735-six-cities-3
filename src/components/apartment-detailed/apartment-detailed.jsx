@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {ReviewsList} from "../reviews-list/reviews-list";
-import {Map} from "../map/map";
-import {ApartmentsList} from "../apartments-list/apartments-list";
+import ReviewsList from "../reviews-list/reviews-list";
+import Map from "../map/map";
+import ApartmentsList from "../apartments-list/apartments-list";
+import {connect} from "react-redux";
 
 export const ApartmentDetailed = (props) => {
-  const {type, price, title, isPremium, rating, photos, description, bedrooms, guests, amenities, host, reviews, coordinates} = props.offer;
+  const {type, price, title, isPremium, rating, photos, description, bedrooms, guests, amenities, host} = props.detailedOffer;
   const ratingPercentage = `${Math.ceil(rating) * 100 / 5}%`;
   const premiumClass = isPremium ? `property__mark` : `property__mark visually-hidden`;
   const superHostClass = host.isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`;
@@ -90,8 +91,8 @@ export const ApartmentDetailed = (props) => {
             </div>
           </div>
           <section className="property__reviews reviews">
-            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-            <ReviewsList reviews={reviews}/>
+            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{props.detailedOfferReviews.length}</span></h2>
+            <ReviewsList />
             <form className="reviews__form form" action="#" method="post">
               <label className="reviews__label form__label" htmlFor="review">Your review</label>
               <div className="reviews__rating-form form__rating">
@@ -142,12 +143,12 @@ export const ApartmentDetailed = (props) => {
           </section>
         </div>
       </div>
-      <section className="property__map map"><Map cityCoordinates={coordinates} availableOffers={props.offersNearby.map((a) => a.coordinates)} markerCoordinates={coordinates}/></section>
+      <section className="property__map map"><Map /></section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <ApartmentsList offers={props.offersNearby} mainClass={`near-places`} showPremium={false} onCardHover={props.onOfferCardHover} onHeaderClick={props.onOfferCardHeaderClick}/>
+            <ApartmentsList />
           </div>
         </section>
       </div>
@@ -156,7 +157,7 @@ export const ApartmentDetailed = (props) => {
 };
 
 ApartmentDetailed.propTypes = {
-  offer: PropTypes.shape({
+  detailedOffer: PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -188,31 +189,21 @@ ApartmentDetailed.propTypes = {
         }).isRequired
     ).isRequired
   }).isRequired,
-  offersNearby: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavourite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    photoSrc: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-    host: PropTypes.shape({
+  detailedOfferReviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired
-    }).isRequired,
-    reviews: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          avatar: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          rating: PropTypes.number.isRequired,
-          date: PropTypes.number.isRequired,
-          text: PropTypes.string.isRequired
-        }).isRequired
-    ).isRequired
-  })).isRequired,
-  onOfferCardHover: PropTypes.func.isRequired,
-  onOfferCardHeaderClick: PropTypes.func.isRequired
+      rating: PropTypes.number.isRequired,
+      date: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired
 };
+
+const mapStateToProps = (state) => ({
+  detailedOffer: state.detailedOffer,
+  detailedOfferReviews: state.detailedOfferReviews
+});
+
+export default connect(mapStateToProps)(ApartmentDetailed);
