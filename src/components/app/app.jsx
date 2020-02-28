@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Main} from "../main/main";
+import Main from "../main/main";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {ApartmentDetailed} from "../apartment-detailed/apartment-detailed";
@@ -28,15 +28,12 @@ export class App extends PureComponent {
 
       return (
         <Main
-          quantity={cityData.offers.length}
           cityCoordinates={cityData.cityCoordinates}
           markerCoordinates={cityData.markerCoordinates}
           cities={this._getAllCities()}
           currentCity={this.props.currentCity}
-          offers={cityData.offers}
           onCardHover={this.props.onCardHover}
           onHeaderClick={this.props.onHeaderClick}
-          onCityClick={this.props.onCityClick}
         />
       );
     } else {
@@ -124,8 +121,7 @@ App.propTypes = {
   })).isRequired,
   onCardHover: PropTypes.func.isRequired,
   onOfferCardHover: PropTypes.func.isRequired,
-  onHeaderClick: PropTypes.func.isRequired,
-  onCityClick: PropTypes.func.isRequired
+  onHeaderClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -138,9 +134,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onHeaderClick(newPage) {
     dispatch(ActionCreator.changeCurrentPage(newPage));
-  },
-  onCityClick(newCity) {
-    dispatch(ActionCreator.changeCity(newCity));
   },
   onCardHover() {
 
