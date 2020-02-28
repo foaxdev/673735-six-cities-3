@@ -2,6 +2,7 @@ import {offers, offersNearby} from "./mocks/offers";
 import {extend} from "./utils/utils";
 
 const initialState = {
+  isSortOpened: false,
   currentPage: -1,
   currentCity: `Amsterdam`,
   offers,
@@ -10,7 +11,9 @@ const initialState = {
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  CHANGE_CURRENT_PAGE: `CHANGE_CURRENT_PAGE`
+  CHANGE_CURRENT_PAGE: `CHANGE_CURRENT_PAGE`,
+  TOGGLE_SORT: `TOGGLE_SORT`,
+  CHANGE_SORT_TYPE: `CHOOSE_SORTING`
 };
 
 export const ActionCreator = {
@@ -21,6 +24,14 @@ export const ActionCreator = {
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city
+  }),
+  toggleSortList: () => ({
+    type: ActionType.TOGGLE_SORT,
+    payload: null
+  }),
+  changeSortType: (sortType) => ({
+    type: ActionType.CHANGE_SORT_TYPE,
+    payload: sortType
   })
 };
 
@@ -34,6 +45,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CURRENT_PAGE:
       return extend(state, {
         currentPage: action.payload || state.currentPage
+      });
+
+    case ActionType.TOGGLE_SORT:
+      return extend(state, {
+        isSortOpened: !state.isSortOpened
       });
   }
 
