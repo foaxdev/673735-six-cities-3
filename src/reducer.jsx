@@ -3,6 +3,7 @@ import {extend} from "./utils/utils";
 
 const initialState = {
   isSortOpened: false,
+  currentSortType: `Popular`,
   currentPage: -1,
   currentCity: `Amsterdam`,
   offers,
@@ -39,7 +40,7 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
-        currentCity: action.payload || state.currentCity,
+        currentCity: action.payload || state.currentCity
       });
 
     case ActionType.CHANGE_CURRENT_PAGE:
@@ -50,6 +51,12 @@ export const reducer = (state = initialState, action) => {
     case ActionType.TOGGLE_SORT:
       return extend(state, {
         isSortOpened: !state.isSortOpened
+      });
+
+    case ActionType.CHANGE_SORT_TYPE:
+      return extend(state, {
+        currentSortType: action.payload || state.currentSortType,
+        isSortOpened: false
       });
   }
 

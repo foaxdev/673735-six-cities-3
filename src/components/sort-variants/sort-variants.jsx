@@ -3,6 +3,13 @@ import {ActionCreator} from "../../reducer";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
+const SORT_TYPES = [
+  `Popular`,
+  `Price: low to high`,
+  `Price: high to low`,
+  `Top rated first`
+];
+
 export class SortVariants extends PureComponent {
 
   render() {
@@ -11,17 +18,19 @@ export class SortVariants extends PureComponent {
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by </span>
-        <span className="places__sorting-type" tabIndex="0" onClick={this.props.onSortClick}>
-          Popular
+        <span className="places__sorting-type" tabIndex="0" onClick={this.props.onSortListClick}>
+          {this.props.currentSortType}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"/>
           </svg>
         </span>
         <ul className={sortListClass}>
-          <li className="places__option places__option--active" tabIndex="0">Popular</li>
-          <li className="places__option" tabIndex="0">Price: low to high</li>
-          <li className="places__option" tabIndex="0">Price: high to low</li>
-          <li className="places__option" tabIndex="0">Top rated first</li>
+          {SORT_TYPES.map((sortType, i) => {
+            const sortTypeClass = this.props.currentSortType === sortType ? `places__option places__option--active` : `places__option`;
+            return (
+              <li key={`sortType-${i}`} className={sortTypeClass} tabIndex="0" onClick={() => this.props.onSortTypeClick(sortType)}>{sortType}</li>
+            );})
+          }
         </ul>
       </form>
     );
@@ -30,19 +39,22 @@ export class SortVariants extends PureComponent {
 
 SortVariants.propTypes = {
   isSortOpened: PropTypes.bool.isRequired,
-  onSortClick: PropTypes.func.isRequired
+  currentSortType: PropTypes.string.isRequired,
+  onSortListClick: PropTypes.func.isRequired,
+  onSortTypeClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isSortOpened: state.isSortOpened
+  isSortOpened: state.isSortOpened,
+  currentSortType: state.currentSortType
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortClick() {
+  onSortListClick() {
     dispatch(ActionCreator.toggleSortList());
   },
-  onSortVariantClick() {
-
+  onSortTypeClick(newSortType) {
+    dispatch(ActionCreator.changeSortType(newSortType));
   }
 });
 
