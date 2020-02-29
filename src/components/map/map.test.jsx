@@ -20,7 +20,9 @@ it(`Should render main Map correctly`, () => {
     currentCityCoordinates: TEST_CURRENT_CITY_COORDINATES,
     coordinatesOfOffersByCity: TEST_COORDINATES_OF_OFFERS_BY_CITY,
     currentCityMarkerCoordinates: TEST_CURRENT_CITY_MARKER_COORDINATES,
-    activeMarkerIndex: 0
+    activeMarkerIndex: 0,
+    currentPage: -1,
+    currentCity: `Amsterdam`
   });
 
   const tree = renderer
@@ -30,7 +32,9 @@ it(`Should render main Map correctly`, () => {
             currentCityCoordinates={TEST_CURRENT_CITY_COORDINATES}
             coordinatesOfOffersByCity={TEST_COORDINATES_OF_OFFERS_BY_CITY}
             currentCityMarkerCoordinates={TEST_CURRENT_CITY_MARKER_COORDINATES}
-            activeMarkerIndex={0}/>
+            activeMarkerIndex={0}
+            currentCity={`Amsterdam`}
+            currentPage={-1}/>
         </Provider>
     ).toJSON();
 

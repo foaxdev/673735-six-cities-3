@@ -363,7 +363,8 @@ it(`Should render Main screen correctly`, () => {
     coordinatesOfOffersByCity: TEST_COORDINATES_OF_OFFERS_BY_CITY,
     currentCityMarkerCoordinates: TEST_CURRENT_CITY_MARKER_COORDINATES,
     showPremiumBadge: true,
-    mainApartmentClass: `cities`
+    mainApartmentClass: `cities`,
+    currentPage: -1
   });
 
   const tree = renderer

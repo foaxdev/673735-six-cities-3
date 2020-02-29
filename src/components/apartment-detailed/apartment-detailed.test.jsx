@@ -497,7 +497,9 @@ it(`Should render Detailed Apartment item correctly`, () => {
     currentCityMarkerCoordinates: [52.3709553943508, 4.89309666406198],
     offersByCity: TEST_OFFERS_BY_CITY,
     showPremiumBadge: false,
-    mainApartmentClass: `near-places`
+    mainApartmentClass: `near-places`,
+    currentPage: 1,
+    currentCity: `Amsterdam`
   });
 
   const tree = renderer

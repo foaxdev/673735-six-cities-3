@@ -22,27 +22,6 @@ export class Map extends PureComponent {
     });
   }
 
-  componentDidMount() {
-    this._setupMap();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.currentPage === this.props.currentPage) {
-      this._updateMarkers();
-    } else {
-      this._map.off();
-      this._map.remove();
-
-      this._setupMap();
-    }
-  }
-
-  render() {
-    return (
-      <div id="map" style={{height: `100%`}}/>
-    );
-  }
-
   _updateMarkers() {
     for (let i = 0; i < this._markers.length; i++) {
       this._markers[i].marker.setIcon(this._markers[i].id === this.props.activeMarkerIndex ? this._activeIcon : this._icon);
@@ -50,6 +29,8 @@ export class Map extends PureComponent {
   }
 
   _setupMap() {
+    this._markers = [];
+
     this._map = leaflet.map(`map`, {
       center: this.props.currentCityCoordinates,
       zoom: this._zoom,
@@ -69,17 +50,36 @@ export class Map extends PureComponent {
       .addTo(this._map);
 
     for (let i = 0; i < this.props.coordinatesOfOffersByCity.length; i++) {
-      let marker = leaflet
-        .marker([this.props.coordinatesOfOffersByCity[i][0], this.props.coordinatesOfOffersByCity[i][1]])
+      let markerInstance = leaflet
+        .marker([this.props.coordinatesOfOffersByCity[i][0], this.props.coordinatesOfOffersByCity[i][1]], {icon: this._icon})
         .addTo(this._map);
-
-      marker.setIcon(this._icon);
 
       this._markers.push({
         id: i,
-        marker: marker
+        marker: markerInstance
       });
     }
+  }
+
+  componentDidMount() {
+    this._setupMap();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentPage === this.props.currentPage && prevProps.currentCity === this.props.currentCity) {
+      this._updateMarkers();
+    } else {
+      this._map.off();
+      this._map.remove();
+
+      this._setupMap();
+    }
+  }
+
+  render() {
+    return (
+      <div id="map" style={{height: `100%`}}/>
+    );
   }
 }
 
@@ -89,10 +89,14 @@ Map.propTypes = {
       PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
   ).isRequired,
   currentCityMarkerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  activeMarkerIndex: PropTypes.number
+  activeMarkerIndex: PropTypes.number,
+  currentPage: PropTypes.number.isRequired,
+  currentCity: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  currentPage: state.currentPage,
+  currentCity: state.currentCity,
   currentCityCoordinates: state.currentCityCoordinates,
   currentCityMarkerCoordinates: state.currentCityMarkerCoordinates,
   coordinatesOfOffersByCity: state.coordinatesOfOffersByCity,
