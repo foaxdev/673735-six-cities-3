@@ -52,14 +52,16 @@ const initialState = {
   offersNearby,
   offersByCityQuantity: getObjectDataByCity(`Amsterdam`, offers).offers.length,
   offersByCity: getObjectDataByCity(`Amsterdam`, offers).offers,
-  coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, offers).offers.map((offer) => offer.coordinates)
+  coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, offers).offers.map((offer) => offer.coordinates),
+  activeMarkerIndex: null
 };
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_CURRENT_PAGE: `CHANGE_CURRENT_PAGE`,
   TOGGLE_SORT: `TOGGLE_SORT`,
-  CHANGE_SORT_TYPE: `CHOOSE_SORTING`
+  CHANGE_SORT_TYPE: `CHOOSE_SORTING`,
+  CHANGE_ACTIVE_MARKER: `CHANGE_ACTIVE_MARKER`
 };
 
 export const ActionCreator = {
@@ -78,6 +80,10 @@ export const ActionCreator = {
   changeSortType: (sortType) => ({
     type: ActionType.CHANGE_SORT_TYPE,
     payload: sortType
+  }),
+  changeActiveMarker: (index) => ({
+    type: ActionType.CHANGE_ACTIVE_MARKER,
+    payload: index
   })
 };
 
@@ -116,6 +122,11 @@ export const reducer = (state = initialState, action) => {
         currentSortType: action.payload || state.currentSortType,
         isSortOpened: false,
         offersByCity: sortOffers(state.currentCity, action.payload || state.currentSortType, state.offers)
+      });
+
+    case ActionType.CHANGE_ACTIVE_MARKER:
+      return extend(state, {
+        activeMarkerIndex: action.payload
       });
   }
 

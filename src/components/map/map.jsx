@@ -9,17 +9,32 @@ export class Map extends PureComponent {
     super(props);
 
     this._map = null;
+    this._markers = [];
+    this._zoom = 12;
+    this._activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [30, 40]
+    });
+
+    this._icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 40]
+    });
   }
 
   componentDidMount() {
     this._setupMap();
   }
 
-  componentDidUpdate() {
-    this._map.off();
-    this._map.remove();
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentPage === this.props.currentPage) {
+      this._updateMarkers();
+    } else {
+      this._map.off();
+      this._map.remove();
 
-    this._setupMap();
+      this._setupMap();
+    }
   }
 
   render() {
@@ -28,19 +43,20 @@ export class Map extends PureComponent {
     );
   }
 
-  _setupMap() {
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 40]
-    });
+  _updateMarkers() {
+    for (let i = 0; i < this._markers.length; i++) {
+      this._markers[i].marker.setIcon(this._markers[i].id === this.props.activeMarkerIndex ? this._activeIcon : this._icon);
+    }
+  }
 
+  _setupMap() {
     this._map = leaflet.map(`map`, {
       center: this.props.currentCityCoordinates,
-      zoom: 14,
+      zoom: this._zoom,
       zoomControl: false,
       marker: true
     });
-    this._map.setView(this.props.currentCityCoordinates, 12);
+    this._map.setView(this.props.currentCityCoordinates, this._zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -49,13 +65,20 @@ export class Map extends PureComponent {
       .addTo(this._map);
 
     leaflet
-      .marker(this.props.currentCityMarkerCoordinates, {icon})
+      .marker(this.props.currentCityMarkerCoordinates)
       .addTo(this._map);
 
     for (let i = 0; i < this.props.coordinatesOfOffersByCity.length; i++) {
-      leaflet
+      let marker = leaflet
         .marker([this.props.coordinatesOfOffersByCity[i][0], this.props.coordinatesOfOffersByCity[i][1]])
         .addTo(this._map);
+
+      marker.setIcon(this._icon);
+
+      this._markers.push({
+        id: i,
+        marker: marker
+      });
     }
   }
 }
@@ -65,13 +88,15 @@ Map.propTypes = {
   coordinatesOfOffersByCity: PropTypes.arrayOf(
       PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
   ).isRequired,
-  currentCityMarkerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+  currentCityMarkerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  activeMarkerIndex: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({
   currentCityCoordinates: state.currentCityCoordinates,
   currentCityMarkerCoordinates: state.currentCityMarkerCoordinates,
-  coordinatesOfOffersByCity: state.coordinatesOfOffersByCity
+  coordinatesOfOffersByCity: state.coordinatesOfOffersByCity,
+  activeMarkerIndex: state.activeMarkerIndex
 });
 
 export default connect(mapStateToProps)(Map);

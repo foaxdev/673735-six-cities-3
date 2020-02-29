@@ -937,7 +937,8 @@ it(`Reducer without additional parameters should return initial state`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    activeMarkerIndex: null
   });
 });
 
@@ -1302,6 +1303,131 @@ it(`Reducer should change current sort type by a given value`, () => {
   });
 });
 
+it(`Reducer should change current active index by a given value`, () => {
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY,
+    isSortOpened: false,
+    currentSortType: `Popular`,
+    currentCityCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).cityCoordinates,
+    currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).markerCoordinates,
+    cities: TEST_OFFERS.map((offer) => offer.city),
+    mainApartmentClass: `cities`,
+    showPremiumBadge: true,
+    detailedOffer: {},
+    detailedOfferReviews: [],
+    offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
+    offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    activeMarkerIndex: null
+  }, {
+    type: ActionType.CHANGE_ACTIVE_MARKER,
+    payload: 0,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY,
+    isSortOpened: false,
+    currentSortType: `Popular`,
+    currentCityCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).cityCoordinates,
+    currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).markerCoordinates,
+    cities: TEST_OFFERS.map((offer) => offer.city),
+    mainApartmentClass: `cities`,
+    showPremiumBadge: true,
+    detailedOffer: {},
+    detailedOfferReviews: [],
+    offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
+    offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    activeMarkerIndex: 0
+  });
+
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY,
+    isSortOpened: false,
+    currentSortType: `Popular`,
+    currentCityCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).cityCoordinates,
+    currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).markerCoordinates,
+    cities: TEST_OFFERS.map((offer) => offer.city),
+    mainApartmentClass: `cities`,
+    showPremiumBadge: true,
+    detailedOffer: {},
+    detailedOfferReviews: [],
+    offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
+    offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    activeMarkerIndex: 0
+  }, {
+    type: ActionType.CHANGE_ACTIVE_MARKER,
+    payload: null,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY,
+    isSortOpened: false,
+    currentSortType: `Popular`,
+    currentCityCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).cityCoordinates,
+    currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).markerCoordinates,
+    cities: TEST_OFFERS.map((offer) => offer.city),
+    mainApartmentClass: `cities`,
+    showPremiumBadge: true,
+    detailedOffer: {},
+    detailedOfferReviews: [],
+    offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
+    offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    activeMarkerIndex: null
+  });
+
+  expect(reducer({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY,
+    isSortOpened: false,
+    currentSortType: `Popular`,
+    currentCityCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).cityCoordinates,
+    currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).markerCoordinates,
+    cities: TEST_OFFERS.map((offer) => offer.city),
+    mainApartmentClass: `cities`,
+    showPremiumBadge: true,
+    detailedOffer: {},
+    detailedOfferReviews: [],
+    offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
+    offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    activeMarkerIndex: 0
+  }, {
+    type: ActionType.CHANGE_ACTIVE_MARKER,
+    payload: 0,
+  })).toEqual({
+    currentPage: -1,
+    currentCity: `Amsterdam`,
+    offers: TEST_OFFERS,
+    offersNearby: TEST_OFFERS_NEARBY,
+    isSortOpened: false,
+    currentSortType: `Popular`,
+    currentCityCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).cityCoordinates,
+    currentCityMarkerCoordinates: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).markerCoordinates,
+    cities: TEST_OFFERS.map((offer) => offer.city),
+    mainApartmentClass: `cities`,
+    showPremiumBadge: true,
+    detailedOffer: {},
+    detailedOfferReviews: [],
+    offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
+    offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    activeMarkerIndex: 0
+  });
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for change city returns correct action`, () => {
     expect(ActionCreator.changeCity(`Japan`)).toEqual({
@@ -1331,6 +1457,14 @@ describe(`Action creators work correctly`, () => {
       .toEqual({
         type: ActionType.CHANGE_SORT_TYPE,
         payload: `Price: low to high`,
+      });
+  });
+
+  it(`Action creator for the change active marker index return correct action`, () => {
+    expect(ActionCreator.changeActiveMarker(2))
+      .toEqual({
+        type: ActionType.CHANGE_ACTIVE_MARKER,
+        payload: 2,
       });
   });
 });

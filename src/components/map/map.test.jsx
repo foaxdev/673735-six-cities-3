@@ -19,7 +19,8 @@ it(`Should render main Map correctly`, () => {
   const store = mockStore({
     currentCityCoordinates: TEST_CURRENT_CITY_COORDINATES,
     coordinatesOfOffersByCity: TEST_COORDINATES_OF_OFFERS_BY_CITY,
-    currentCityMarkerCoordinates: TEST_CURRENT_CITY_MARKER_COORDINATES
+    currentCityMarkerCoordinates: TEST_CURRENT_CITY_MARKER_COORDINATES,
+    activeMarkerIndex: 0
   });
 
   const tree = renderer
@@ -28,7 +29,8 @@ it(`Should render main Map correctly`, () => {
           <Map
             currentCityCoordinates={TEST_CURRENT_CITY_COORDINATES}
             coordinatesOfOffersByCity={TEST_COORDINATES_OF_OFFERS_BY_CITY}
-            currentCityMarkerCoordinates={TEST_CURRENT_CITY_MARKER_COORDINATES}/>
+            currentCityMarkerCoordinates={TEST_CURRENT_CITY_MARKER_COORDINATES}
+            activeMarkerIndex={0}/>
         </Provider>
     ).toJSON();
 

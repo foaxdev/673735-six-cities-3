@@ -11,7 +11,7 @@ export const Apartment = ({index, offer, mainApartmentClass, showPremiumBadge, o
   const imageWrapClass = `${mainApartmentClass}__image-wrapper place-card__image-wrapper`;
 
   return (
-    <article className={articleClass} onMouseOver={onCardHover} style={{marginLeft: `8px`}}>
+    <article className={articleClass} onMouseOver={() => onCardHover(index)} style={{marginLeft: `8px`}}>
       <div className={premiumClass}>
         <span>Premium</span>
       </div>
@@ -71,8 +71,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCardHover() {
-
+  onCardHover(index) {
+    dispatch(ActionCreator.changeActiveMarker(index));
   },
   onHeaderClick(newPage) {
     dispatch(ActionCreator.changeCurrentPage(newPage));
