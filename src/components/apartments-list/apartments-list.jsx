@@ -1,29 +1,17 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Apartment} from "../apartment/apartment";
+import Apartment from "../apartment/apartment";
+import {connect} from "react-redux";
 
 export class ApartmentsList extends PureComponent {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: -1
-    };
-  }
-
   render() {
-    const {offers, mainClass, showPremium, onCardHover, onHeaderClick} = this.props;
 
-    return offers.map((offer, index) =>
+    return this.props.offersByCity.map((offer, index) =>
       <Apartment
         index={index}
         key={offer + index}
         offer={offer}
-        showPremium={showPremium}
-        mainClass={mainClass}
-        onCardHover={onCardHover}
-        onHeaderClick={onHeaderClick}
       />
     );
   }
@@ -31,7 +19,7 @@ export class ApartmentsList extends PureComponent {
 
 
 ApartmentsList.propTypes = {
-  offers: PropTypes.arrayOf(
+  offersByCity: PropTypes.arrayOf(
       PropTypes.shape({
         type: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
@@ -64,9 +52,11 @@ ApartmentsList.propTypes = {
             }).isRequired
         ).isRequired
       }).isRequired
-  ).isRequired,
-  mainClass: PropTypes.string.isRequired,
-  showPremium: PropTypes.bool.isRequired,
-  onCardHover: PropTypes.func.isRequired,
-  onHeaderClick: PropTypes.func.isRequired
+  ).isRequired
 };
+
+const mapStateToProps = (state) => ({
+  offersByCity: state.offersByCity
+});
+
+export default connect(mapStateToProps)(ApartmentsList);

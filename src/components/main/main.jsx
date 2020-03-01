@@ -1,97 +1,64 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {ApartmentsList} from "../apartments-list/apartments-list";
-import {Map} from "../map/map";
-import {CitiesList} from "../cities-list/cities-list";
+import ApartmentsList from "../apartments-list/apartments-list";
+import Map from "../map/map";
+import CitiesList from "../cities-list/cities-list";
+import SortVariants from "../sort-variants/sort-variants";
+import {connect} from "react-redux";
 
-export const Main = ({quantity, cityCoordinates, markerCoordinates, cities, currentCity, offers, onCardHover, onHeaderClick, onCityClick}) => {
-  const coordinates = offers.map((offer) => offer.coordinates);
-  const mainContainerClass = offers.length > 0 ? `cities__places-container container` : `cities__places-container cities__places-container--empty container`;
-  const mainClass = offers.length > 0 ? `page__main page__main--index` : `page__main page__main--index page__main--index-empty`;
+export class Main extends PureComponent {
 
-  return (<main className={mainClass}>
-    <h1 className="visually-hidden">Cities</h1>
-    <div className="tabs">
-      <section className="locations container">
-        <CitiesList cities={cities} currentCity={currentCity} onCityClick={onCityClick}/>
-      </section>
-    </div>
-    <div className="cities" style={{minHeight: `85vh`}}>
-      <div className={mainContainerClass}>
-        {
-          (offers.length > 0)
-            ? <React.Fragment>
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{quantity} places to stay in {currentCity}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"/>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                    <li className="places__option" tabIndex="0">Price: low to high</li>
-                    <li className="places__option" tabIndex="0">Price: high to low</li>
-                    <li className="places__option" tabIndex="0">Top rated first</li>
-                  </ul>
-                </form>
-                <div className="cities__places-list places__list tabs__content">{<ApartmentsList offers={offers} mainClass={`cities`} showPremium={true} onCardHover={onCardHover} onHeaderClick={onHeaderClick}/>}</div>
-              </section>
-              <div className="cities__right-section">
-                <section className="cities__map map">{<Map cityCoordinates={cityCoordinates} availableOffers={coordinates} markerCoordinates={markerCoordinates}/>}</section>
-              </div>
-            </React.Fragment>
-            : <React.Fragment>
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">We could not find any property available at the moment in {currentCity}</p>
-                </div>
-              </section>
-              <div className="cities__right-section"/>
-            </React.Fragment>
-        }
+  render() {
+    const {offersByCityQuantity, currentCity} = this.props;
+    const mainContainerClass = offersByCityQuantity > 0 ? `cities__places-container container` : `cities__places-container cities__places-container--empty container`;
+    const mainClass = offersByCityQuantity > 0 ? `page__main page__main--index` : `page__main page__main--index page__main--index-empty`;
+
+    return (<main className={mainClass}>
+      <h1 className="visually-hidden">Cities</h1>
+      <div className="tabs">
+        <section className="locations container">
+          <CitiesList />
+        </section>
       </div>
-    </div>
-  </main>);
-};
+      <div className="cities" style={{minHeight: `85vh`}}>
+        <div className={mainContainerClass}>
+          {
+            (offersByCityQuantity > 0)
+              ? <React.Fragment>
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{offersByCityQuantity} places to stay in {currentCity}</b>
+                  <SortVariants />
+                  <div className="cities__places-list places__list tabs__content">{<ApartmentsList />}</div>
+                </section>
+                <div className="cities__right-section">
+                  <section className="cities__map map">{<Map />}</section>
+                </div>
+              </React.Fragment>
+              : <React.Fragment>
+                <section className="cities__no-places">
+                  <div className="cities__status-wrapper tabs__content">
+                    <b className="cities__status">No places to stay available</b>
+                    <p className="cities__status-description">We could not find any property available at the moment in {currentCity}</p>
+                  </div>
+                </section>
+                <div className="cities__right-section"/>
+              </React.Fragment>
+          }
+        </div>
+      </div>
+    </main>);
+  }
+}
 
 Main.propTypes = {
-  quantity: PropTypes.number.isRequired,
-  cityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  markerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  currentCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavourite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    photoSrc: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-    host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired
-    }).isRequired,
-    reviews: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          avatar: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          rating: PropTypes.number.isRequired,
-          date: PropTypes.number.isRequired,
-          text: PropTypes.string.isRequired
-        }).isRequired
-    ).isRequired
-  })).isRequired,
-  onCardHover: PropTypes.func.isRequired,
-  onHeaderClick: PropTypes.func.isRequired,
-  onCityClick: PropTypes.func.isRequired
+  offersByCityQuantity: PropTypes.number.isRequired,
+  currentCity: PropTypes.string.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  currentCity: state.currentCity,
+  offersByCityQuantity: state.offersByCityQuantity
+});
+
+export default connect(mapStateToProps)(Main);

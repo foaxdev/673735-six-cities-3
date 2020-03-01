@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render Apartment item like on detailed page correctly 1`] = `
+exports[`Should render Apartment item like on a detailed page correctly 1`] = `
 <article
   className="near-places__place-card place-card"
   onMouseOver={[Function]}
@@ -11,7 +11,7 @@ exports[`Should render Apartment item like on detailed page correctly 1`] = `
   }
 >
   <div
-    className="place-card__mark visually-hidden"
+    className="place-card__mark"
   >
     <span>
       Premium
@@ -120,7 +120,7 @@ exports[`Should render Apartment item like on detailed page correctly 1`] = `
 
 exports[`Should render Apartment item like on main page correctly 1`] = `
 <article
-  className="near-places__place-card place-card"
+  className="cities__place-card place-card"
   onMouseOver={[Function]}
   style={
     Object {
@@ -136,7 +136,7 @@ exports[`Should render Apartment item like on main page correctly 1`] = `
     </span>
   </div>
   <div
-    className="near-places__image-wrapper place-card__image-wrapper"
+    className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
       href="#"
