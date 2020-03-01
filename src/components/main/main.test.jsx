@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Main} from "./main";
+import Main from "./main";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
 const mockStore = configureStore([]);
 
-export const TEST_OFFERS = [
+const TEST_OFFERS = [
   {
     type: `apartment`,
     price: 120,
@@ -370,9 +370,7 @@ it(`Should render Main screen correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main
-            offersByCityQuantity={10}
-            currentCity={TEST_CURRENT_CITY}/>
+          <Main />
         </Provider>
     ).toJSON();
 

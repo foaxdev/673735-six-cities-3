@@ -2,11 +2,11 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {App} from "./app";
+import App from "./app";
 
 const mockStore = configureStore([]);
 
-export const TEST_OFFERS = [
+const TEST_OFFERS = [
   {
     city: `Amsterdam`,
     cityCoordinates: [52.38333, 4.9],
@@ -1200,7 +1200,7 @@ const TEST_OFFERS_NEARBY = [
     ]
   }
 ];
-const TEST_HANDLER = () => {};
+
 const TEST_CURRENT_PAGE = -1;
 const TEST_CURRENT_CITY = `Amsterdam`;
 const TEST_CITIES = [`Japan`, `Korea`, `China`];
@@ -1234,15 +1234,7 @@ it(`Should render App screen correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App
-            currentCity={TEST_CURRENT_CITY}
-            currentPage={TEST_CURRENT_PAGE}
-            offers={TEST_OFFERS}
-            offersNearby={TEST_OFFERS_NEARBY}
-            onCardHover={TEST_HANDLER}
-            onOfferCardHover={TEST_HANDLER}
-            onHeaderClick={TEST_HANDLER}
-            onCityClick={TEST_HANDLER}/>
+          <App />
         </Provider>
     ).toJSON();
 

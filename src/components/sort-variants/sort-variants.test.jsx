@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import {SortVariants} from "./sort-variants";
+import SortVariants from "./sort-variants";
 
 const mockStore = configureStore([]);
 const TEST_HANDLER = () => {};
@@ -18,11 +18,7 @@ it(`Should render closed Sort Variants correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <SortVariants
-            isSortOpened={false}
-            currentSortType={`Popular`}
-            onSortListClick={TEST_HANDLER}
-            onSortTypeClick={TEST_HANDLER}/>
+          <SortVariants />
         </Provider>
     ).toJSON();
 
@@ -40,11 +36,7 @@ it(`Should render opened Sort Variants correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <SortVariants
-            isSortOpened={true}
-            currentSortType={`Top rated first`}
-            onSortListClick={TEST_HANDLER}
-            onSortTypeClick={TEST_HANDLER}/>
+          <SortVariants />
         </Provider>
     ).toJSON();
 

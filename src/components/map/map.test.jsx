@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Map} from "./map";
+import Map from "./map";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
@@ -28,13 +28,7 @@ it(`Should render main Map correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Map
-            currentCityCoordinates={TEST_CURRENT_CITY_COORDINATES}
-            coordinatesOfOffersByCity={TEST_COORDINATES_OF_OFFERS_BY_CITY}
-            currentCityMarkerCoordinates={TEST_CURRENT_CITY_MARKER_COORDINATES}
-            activeMarkerIndex={0}
-            currentCity={`Amsterdam`}
-            currentPage={-1}/>
+          <Map />
         </Provider>
     ).toJSON();
 

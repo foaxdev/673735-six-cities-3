@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import React from "react";
-import {ApartmentsList} from "./apartments-list";
+import ApartmentsList from "./apartments-list";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
@@ -367,7 +367,7 @@ it(`Should render ApartmentsList on the detailed page correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <ApartmentsList offersByCity={TEST_OFFERS}/>
+          <ApartmentsList />
         </Provider>
     ).toJSON();
 

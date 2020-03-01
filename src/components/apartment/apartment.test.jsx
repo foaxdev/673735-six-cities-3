@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Apartment} from "./apartment";
+import Apartment from "./apartment";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
 const mockStore = configureStore([]);
 
-export const TEST_OFFER = {
+const TEST_OFFER = {
   type: `apartment`,
   price: 120,
   title: `Wood and stone place`,
@@ -186,9 +186,7 @@ it(`Should render Apartment item like on main page correctly`, () => {
 it(`Should render Apartment item like on a detailed page correctly`, () => {
   const store = mockStore({
     onCardHover: TEST_HANDLER,
-    offer: TEST_OFFER,
     showPremiumBadge: true,
-    index: 0,
     onHeaderClick: TEST_HANDLER,
     mainApartmentClass: TEST_MAIN_CLASS_ON_DETAILED_PAGE
   });
@@ -197,12 +195,8 @@ it(`Should render Apartment item like on a detailed page correctly`, () => {
     .create(
         <Provider store={store}>
           <Apartment
-            onCardHover={TEST_HANDLER}
             offer={TEST_OFFER}
-            showPremiumBadge={false}
-            index={0}
-            onHeaderClick={TEST_HANDLER}
-            mainApartmentClass={TEST_MAIN_CLASS_ON_DETAILED_PAGE}/>
+            index={0}/>
         </Provider>
     ).toJSON();
 

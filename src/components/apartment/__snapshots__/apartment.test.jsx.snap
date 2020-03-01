@@ -11,7 +11,7 @@ exports[`Should render Apartment item like on a detailed page correctly 1`] = `
   }
 >
   <div
-    className="place-card__mark visually-hidden"
+    className="place-card__mark"
   >
     <span>
       Premium

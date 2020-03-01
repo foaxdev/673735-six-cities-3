@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {ReviewsList} from "./reviews-list";
+import ReviewsList from "./reviews-list";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
@@ -113,7 +113,7 @@ it(`Should render Reviews List correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <ReviewsList detailedOfferReviews={TEST_REVIEWS}/>
+          <ReviewsList />
         </Provider>
     ).toJSON();
 

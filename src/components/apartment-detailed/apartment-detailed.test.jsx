@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {ApartmentDetailed} from "./apartment-detailed";
+import ApartmentDetailed from "./apartment-detailed";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
@@ -505,9 +505,7 @@ it(`Should render Detailed Apartment item correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <ApartmentDetailed
-            detailedOffer={TEST_OFFER}
-            detailedOfferReviews={TEST_OFFER.reviews}/>
+          <ApartmentDetailed />
         </Provider>
     ).toJSON();
 
