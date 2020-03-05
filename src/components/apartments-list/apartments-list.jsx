@@ -1,9 +1,9 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Apartment from "../apartment/apartment";
 import {connect} from "react-redux";
 
-export class ApartmentsList extends PureComponent {
+export class ApartmentsList extends React.PureComponent {
 
   render() {
 

@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import ApartmentsList from "../apartments-list/apartments-list";
 import Map from "../map/map";
@@ -6,7 +6,7 @@ import CitiesList from "../cities-list/cities-list";
 import SortVariants from "../sort-variants/sort-variants";
 import {connect} from "react-redux";
 
-export class Main extends PureComponent {
+export class Main extends React.PureComponent {
 
   render() {
     const {offersByCityQuantity, currentCity} = this.props;

@@ -1,9 +1,9 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import {connect} from "react-redux";
 
-export class Map extends PureComponent {
+export class Map extends React.PureComponent {
 
   constructor(props) {
     super(props);
