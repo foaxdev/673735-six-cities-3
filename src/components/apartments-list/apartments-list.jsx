@@ -7,10 +7,10 @@ export class ApartmentsList extends React.PureComponent {
 
   render() {
 
-    return this.props.offersByCity.map((offer, index) =>
+    return this.props.offersByCity.map((offer) =>
       <Apartment
-        index={index}
-        key={offer + index}
+        id={offer.id}
+        key={offer + offer.id}
         offer={offer}
       />
     );
@@ -21,6 +21,7 @@ export class ApartmentsList extends React.PureComponent {
 ApartmentsList.propTypes = {
   offersByCity: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.number.isRequired,
         type: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,

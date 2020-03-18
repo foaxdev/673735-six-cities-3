@@ -5,6 +5,7 @@ export const offers = [
     markerCoordinates: [52.3709553943508, 4.89309666406198],
     offers: [
       {
+        id: 0,
         type: `apartment`,
         price: 120,
         title: `Wood and stone place`,
@@ -152,6 +153,7 @@ export const offers = [
         ]
       },
       {
+        id: 1,
         type: `room`,
         price: 20,
         title: `Your perfect room`,
@@ -210,6 +212,7 @@ export const offers = [
         ]
       },
       {
+        id: 2,
         type: `house`,
         price: 220,
         title: `The best house ever`,
@@ -267,6 +270,7 @@ export const offers = [
         ]
       },
       {
+        id: 3,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -343,6 +347,7 @@ export const offers = [
     markerCoordinates: [48.8566, 2.3522],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -419,6 +424,7 @@ export const offers = [
     markerCoordinates: [50.9375, 6.9603],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -495,6 +501,7 @@ export const offers = [
     markerCoordinates: [50.8503, 4.3517],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -571,6 +578,7 @@ export const offers = [
     markerCoordinates: [53.5511, 9.9937],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -651,6 +659,7 @@ export const offers = [
 
 export const offersNearby = [
   {
+    id: 0,
     type: `hotel`,
     price: 120,
     title: `Hotel, not hostel`,
@@ -720,6 +729,7 @@ export const offersNearby = [
     ]
   },
   {
+    id: 1,
     type: `apartment`,
     price: 70,
     title: `Some good place`,
@@ -789,6 +799,7 @@ export const offersNearby = [
     ]
   },
   {
+    id: 2,
     type: `house`,
     price: 150,
     title: `Cool house`,

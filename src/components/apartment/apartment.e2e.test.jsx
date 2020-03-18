@@ -4,6 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import {Apartment} from "./apartment";
 
 export const TEST_OFFER = {
+  id: 0,
   type: `apartment`,
   price: 120,
   title: `Wood and stone place`,
@@ -27,7 +28,7 @@ it(`Card should be hovered`, () => {
         onCardHover={onCardHover}
         offer={TEST_OFFER}
         showPremiumBadge={false}
-        index={0}
+        id={0}
         onHeaderClick={TEST_HANDLER}
         mainApartmentClass={TEST_MAIN_CLASS}/>
   );
@@ -44,7 +45,7 @@ it(`When click on apt preview its page should be rendered`, () => {
         onCardHover={TEST_HANDLER}
         offer={TEST_OFFER}
         showPremiumBadge={false}
-        index={0}
+        id={0}
         onHeaderClick={onHeaderClick}
         mainApartmentClass={TEST_MAIN_CLASS}/>
   );

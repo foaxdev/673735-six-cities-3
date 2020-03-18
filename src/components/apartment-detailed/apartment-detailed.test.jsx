@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 const mockStore = configureStore([]);
 
 const TEST_OFFER = {
+  id: 0,
   type: `apartment`,
   price: 120,
   title: `Wood and stone place`,
@@ -156,6 +157,7 @@ const TEST_OFFER = {
 
 const TEST_OFFERS_BY_CITY = [
   {
+    id: 0,
     type: `apartment`,
     price: 120,
     title: `Wood and stone place`,
@@ -303,6 +305,7 @@ const TEST_OFFERS_BY_CITY = [
     ]
   },
   {
+    id: 1,
     type: `room`,
     price: 20,
     title: `Your perfect room`,
@@ -361,6 +364,7 @@ const TEST_OFFERS_BY_CITY = [
     ]
   },
   {
+    id: 2,
     type: `house`,
     price: 220,
     title: `The best house ever`,
@@ -418,6 +422,7 @@ const TEST_OFFERS_BY_CITY = [
     ]
   },
   {
+    id: 3,
     type: `hotel`,
     price: 100,
     title: `Hotel, not hostel`,

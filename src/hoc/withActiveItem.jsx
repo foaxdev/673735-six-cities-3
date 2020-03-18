@@ -1,6 +1,6 @@
 import React from "react";
 
-const withActiveItem = (Component) => {
+export const withActiveItem = (Component) => {
   class WithActiveItem extends React.PureComponent {
     constructor(props) {
       super(props);
