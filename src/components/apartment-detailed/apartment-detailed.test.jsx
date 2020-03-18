@@ -498,7 +498,24 @@ it(`Should render Detailed Apartment item correctly`, () => {
     detailedOffer: TEST_OFFER,
     detailedOfferReviews: TEST_OFFER.reviews,
     currentCityCoordinates: [52.38333, 4.9],
-    coordinatesOfOffersByCity: [[52.3909553943508, 4.85309666406198], [52.3909553943508, 4.85309666406198], [52.3909553943508, 4.85309666406198]],
+    coordinatesOfOffersByCity: [
+      {
+        id: 0,
+        coordinates: [52.3909553943508, 4.85309666406198]
+      },
+      {
+        id: 1,
+        coordinates: [52.369553943508, 4.85309666406198]
+      },
+      {
+        id: 2,
+        coordinates: [52.3909553943508, 4.929309666406198]
+      },
+      {
+        id: 3,
+        coordinates: [52.3809553943508, 4.939309666406198]
+      }
+    ],
     currentCityMarkerCoordinates: [52.3709553943508, 4.89309666406198],
     offersByCity: TEST_OFFERS_BY_CITY,
     showPremiumBadge: false,

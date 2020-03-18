@@ -85,10 +85,12 @@ export class Map extends React.PureComponent {
 
 Map.propTypes = {
   currentCityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  coordinatesOfOffersByCity: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
-  }).isRequired,
+  coordinatesOfOffersByCity: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+      }).isRequired
+  ).isRequired,
   currentCityMarkerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   activeMarkerIndex: PropTypes.number,
   currentPage: PropTypes.number.isRequired,
