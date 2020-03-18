@@ -52,7 +52,12 @@ const initialState = {
   offersNearby,
   offersByCityQuantity: getObjectDataByCity(`Amsterdam`, offers).offers.length,
   offersByCity: getObjectDataByCity(`Amsterdam`, offers).offers,
-  coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, offers).offers.map((offer) => offer.coordinates),
+  coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, offers).offers.map(
+    (offer) => ({
+      coordinates: offer.coordinates,
+      id: offer.id
+    })
+  ),
   activeMarkerIndex: null
 };
 
