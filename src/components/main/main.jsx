@@ -5,6 +5,7 @@ import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import SortVariants from "../sort-variants/sort-variants";
 import {connect} from "react-redux";
+import {withActiveItem} from "../../hocs/with-active-item";
 
 export class Main extends React.PureComponent {
 
@@ -13,11 +14,14 @@ export class Main extends React.PureComponent {
     const mainContainerClass = offersByCityQuantity > 0 ? `cities__places-container container` : `cities__places-container cities__places-container--empty container`;
     const mainClass = offersByCityQuantity > 0 ? `page__main page__main--index` : `page__main page__main--index page__main--index-empty`;
 
+    const CitiesListWrapped = withActiveItem(CitiesList);
+    const ApartmentsListWrapped = withActiveItem(ApartmentsList);
+
     return (<main className={mainClass}>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CitiesList />
+          <CitiesListWrapped />
         </section>
       </div>
       <div className="cities" style={{minHeight: `85vh`}}>
@@ -29,7 +33,7 @@ export class Main extends React.PureComponent {
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{offersByCityQuantity} places to stay in {currentCity}</b>
                   <SortVariants />
-                  <div className="cities__places-list places__list tabs__content">{<ApartmentsList />}</div>
+                  <div className="cities__places-list places__list tabs__content">{<ApartmentsListWrapped />}</div>
                 </section>
                 <div className="cities__right-section">
                   <section className="cities__map map">{<Map />}</section>
