@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 const mockStore = configureStore([]);
 
 const TEST_OFFER = {
+  id: 0,
   type: `apartment`,
   price: 120,
   title: `Wood and stone place`,
@@ -156,6 +157,7 @@ const TEST_OFFER = {
 
 const TEST_OFFERS_BY_CITY = [
   {
+    id: 0,
     type: `apartment`,
     price: 120,
     title: `Wood and stone place`,
@@ -303,6 +305,7 @@ const TEST_OFFERS_BY_CITY = [
     ]
   },
   {
+    id: 1,
     type: `room`,
     price: 20,
     title: `Your perfect room`,
@@ -361,6 +364,7 @@ const TEST_OFFERS_BY_CITY = [
     ]
   },
   {
+    id: 2,
     type: `house`,
     price: 220,
     title: `The best house ever`,
@@ -418,6 +422,7 @@ const TEST_OFFERS_BY_CITY = [
     ]
   },
   {
+    id: 3,
     type: `hotel`,
     price: 100,
     title: `Hotel, not hostel`,
@@ -493,7 +498,24 @@ it(`Should render Detailed Apartment item correctly`, () => {
     detailedOffer: TEST_OFFER,
     detailedOfferReviews: TEST_OFFER.reviews,
     currentCityCoordinates: [52.38333, 4.9],
-    coordinatesOfOffersByCity: [[52.3909553943508, 4.85309666406198], [52.3909553943508, 4.85309666406198], [52.3909553943508, 4.85309666406198]],
+    coordinatesOfOffersByCity: [
+      {
+        id: 0,
+        coordinates: [52.3909553943508, 4.85309666406198]
+      },
+      {
+        id: 1,
+        coordinates: [52.369553943508, 4.85309666406198]
+      },
+      {
+        id: 2,
+        coordinates: [52.3909553943508, 4.929309666406198]
+      },
+      {
+        id: 3,
+        coordinates: [52.3809553943508, 4.939309666406198]
+      }
+    ],
     currentCityMarkerCoordinates: [52.3709553943508, 4.89309666406198],
     offersByCity: TEST_OFFERS_BY_CITY,
     showPremiumBadge: false,

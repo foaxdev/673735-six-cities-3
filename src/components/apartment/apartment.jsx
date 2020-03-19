@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer";
 import {connect} from "react-redux";
 
-export const Apartment = ({index, offer, mainApartmentClass, showPremiumBadge, onCardHover, onHeaderClick}) => {
+export const Apartment = ({id, offer, mainApartmentClass, showPremiumBadge, onCardHover, onHeaderClick}) => {
   const {type, price, title, isPremium, rating, photoSrc} = offer;
   const ratingPercentage = `${Math.floor(rating * 100 / 5)}%`;
   const premiumClass = isPremium && showPremiumBadge ? `place-card__mark` : `place-card__mark visually-hidden`;
@@ -11,7 +11,7 @@ export const Apartment = ({index, offer, mainApartmentClass, showPremiumBadge, o
   const imageWrapClass = `${mainApartmentClass}__image-wrapper place-card__image-wrapper`;
 
   return (
-    <article className={articleClass} onMouseOver={() => onCardHover(index)} style={{marginLeft: `8px`}}>
+    <article className={articleClass} onMouseOver={() => onCardHover(id)} style={{marginLeft: `8px`}}>
       <div className={premiumClass}>
         <span>Premium</span>
       </div>
@@ -40,7 +40,7 @@ export const Apartment = ({index, offer, mainApartmentClass, showPremiumBadge, o
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#" className="place-card__link" onClick={() => onHeaderClick(index)}>{title}</a>
+          <a href="#" className="place-card__link" onClick={() => onHeaderClick(id)}>{title}</a>
         </h2>
         <p className="place-card__type" style={{textTransform: `capitalize`}}>{type}</p>
       </div>
@@ -49,7 +49,7 @@ export const Apartment = ({index, offer, mainApartmentClass, showPremiumBadge, o
 };
 
 Apartment.propTypes = {
-  index: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   offer: PropTypes.shape({
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

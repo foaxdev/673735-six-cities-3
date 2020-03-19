@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import {ActionCreator} from "../../reducer";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
@@ -10,7 +10,7 @@ const SORT_TYPES = [
   `Top rated first`
 ];
 
-export class SortVariants extends PureComponent {
+export class SortVariants extends React.PureComponent {
 
   render() {
     const sortListClass = this.props.isSortOpened ? `places__options places__options--custom places__options--opened` : `places__options places__options--custom`;

@@ -1,9 +1,9 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import {connect} from "react-redux";
 
-export class Map extends PureComponent {
+export class Map extends React.PureComponent {
 
   constructor(props) {
     super(props);
@@ -51,11 +51,11 @@ export class Map extends PureComponent {
 
     for (let i = 0; i < this.props.coordinatesOfOffersByCity.length; i++) {
       let markerInstance = leaflet
-        .marker([this.props.coordinatesOfOffersByCity[i][0], this.props.coordinatesOfOffersByCity[i][1]], {icon: this._icon})
+        .marker([this.props.coordinatesOfOffersByCity[i].coordinates[0], this.props.coordinatesOfOffersByCity[i].coordinates[1]], {icon: this._icon})
         .addTo(this._map);
 
       this._markers.push({
-        id: i,
+        id: this.props.coordinatesOfOffersByCity[i].id,
         marker: markerInstance
       });
     }
@@ -86,7 +86,10 @@ export class Map extends PureComponent {
 Map.propTypes = {
   currentCityCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   coordinatesOfOffersByCity: PropTypes.arrayOf(
-      PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        coordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+      }).isRequired
   ).isRequired,
   currentCityMarkerCoordinates: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   activeMarkerIndex: PropTypes.number,

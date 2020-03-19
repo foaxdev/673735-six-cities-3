@@ -7,6 +7,7 @@ const TEST_OFFERS = [
     markerCoordinates: [52.3709553943508, 4.89309666406198],
     offers: [
       {
+        id: 0,
         type: `apartment`,
         price: 120,
         title: `Wood and stone place`,
@@ -154,6 +155,7 @@ const TEST_OFFERS = [
         ]
       },
       {
+        id: 1,
         type: `room`,
         price: 20,
         title: `Your perfect room`,
@@ -212,6 +214,7 @@ const TEST_OFFERS = [
         ]
       },
       {
+        id: 2,
         type: `house`,
         price: 220,
         title: `The best house ever`,
@@ -269,6 +272,7 @@ const TEST_OFFERS = [
         ]
       },
       {
+        id: 3,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -345,6 +349,7 @@ const TEST_OFFERS = [
     markerCoordinates: [48.8566, 2.3522],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -421,6 +426,7 @@ const TEST_OFFERS = [
     markerCoordinates: [50.9375, 6.9603],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -497,6 +503,7 @@ const TEST_OFFERS = [
     markerCoordinates: [50.8503, 4.3517],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -573,6 +580,7 @@ const TEST_OFFERS = [
     markerCoordinates: [53.5511, 9.9937],
     offers: [
       {
+        id: 0,
         type: `hotel`,
         price: 100,
         title: `Hotel, not hostel`,
@@ -652,6 +660,7 @@ const TEST_OFFERS = [
 ];
 
 const TEST_DETAILED_OFFER = {
+  id: 1,
   type: `room`,
   price: 20,
   title: `Your perfect room`,
@@ -712,6 +721,7 @@ const TEST_DETAILED_OFFER = {
 
 const TEST_OFFERS_NEARBY = [
   {
+    id: 0,
     type: `hotel`,
     price: 120,
     title: `Hotel, not hostel`,
@@ -781,6 +791,7 @@ const TEST_OFFERS_NEARBY = [
     ]
   },
   {
+    id: 1,
     type: `apartment`,
     price: 70,
     title: `Some good place`,
@@ -850,6 +861,7 @@ const TEST_OFFERS_NEARBY = [
     ]
   },
   {
+    id: 2,
     type: `house`,
     price: 150,
     title: `Cool house`,
@@ -937,7 +949,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates})),
     activeMarkerIndex: null
   });
 });
@@ -959,7 +971,7 @@ it(`Reducer should change city by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_CITY,
     payload: `Paris`,
@@ -979,7 +991,7 @@ it(`Reducer should change city by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Paris`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Paris`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Paris`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Paris`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 
   expect(reducer({
@@ -998,7 +1010,7 @@ it(`Reducer should change city by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_CITY,
     payload: `Amsterdam`,
@@ -1018,7 +1030,7 @@ it(`Reducer should change city by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 });
 
@@ -1039,7 +1051,7 @@ it(`Reducer should change current page by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_CURRENT_PAGE,
     payload: 1,
@@ -1059,7 +1071,7 @@ it(`Reducer should change current page by a given value`, () => {
     detailedOfferReviews: TEST_DETAILED_OFFER.reviews,
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: TEST_OFFERS_NEARBY,
-    coordinatesOfOffersByCity: TEST_OFFERS_NEARBY.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: TEST_OFFERS_NEARBY.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 
   expect(reducer({
@@ -1078,7 +1090,7 @@ it(`Reducer should change current page by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_CURRENT_PAGE,
     payload: null,
@@ -1098,7 +1110,7 @@ it(`Reducer should change current page by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: TEST_OFFERS_NEARBY.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: TEST_OFFERS_NEARBY.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 });
 
@@ -1119,7 +1131,7 @@ it(`Reducer should return default`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_CITY,
     payload: null,
@@ -1139,7 +1151,7 @@ it(`Reducer should return default`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 
   expect(reducer({
@@ -1158,7 +1170,7 @@ it(`Reducer should return default`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_CURRENT_PAGE,
     payload: null,
@@ -1178,7 +1190,7 @@ it(`Reducer should return default`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: TEST_OFFERS_NEARBY.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: TEST_OFFERS_NEARBY.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 });
 
@@ -1199,7 +1211,7 @@ it(`Reducer should change current sort type by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_SORT_TYPE,
     payload: `Price: low to high`,
@@ -1219,7 +1231,7 @@ it(`Reducer should change current sort type by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: sortOffers(`Amsterdam`, `Price: low to high`, TEST_OFFERS),
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 
   expect(reducer({
@@ -1238,7 +1250,7 @@ it(`Reducer should change current sort type by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.CHANGE_SORT_TYPE,
     payload: null,
@@ -1258,7 +1270,7 @@ it(`Reducer should change current sort type by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: sortOffers(`Amsterdam`, `Popular`, TEST_OFFERS),
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 });
 
@@ -1279,7 +1291,7 @@ it(`Reducer should change current sort type by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   }, {
     type: ActionType.TOGGLE_SORT,
     payload: null,
@@ -1299,7 +1311,7 @@ it(`Reducer should change current sort type by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates)
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates}))
   });
 });
 
@@ -1320,7 +1332,7 @@ it(`Reducer should change current active index by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates})),
     activeMarkerIndex: null
   }, {
     type: ActionType.CHANGE_ACTIVE_MARKER,
@@ -1341,7 +1353,7 @@ it(`Reducer should change current active index by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates})),
     activeMarkerIndex: 0
   });
 
@@ -1361,7 +1373,7 @@ it(`Reducer should change current active index by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates})),
     activeMarkerIndex: 0
   }, {
     type: ActionType.CHANGE_ACTIVE_MARKER,
@@ -1382,7 +1394,7 @@ it(`Reducer should change current active index by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates})),
     activeMarkerIndex: null
   });
 
@@ -1402,7 +1414,7 @@ it(`Reducer should change current active index by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates})),
     activeMarkerIndex: 0
   }, {
     type: ActionType.CHANGE_ACTIVE_MARKER,
@@ -1423,7 +1435,7 @@ it(`Reducer should change current active index by a given value`, () => {
     detailedOfferReviews: [],
     offersByCityQuantity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.length,
     offersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers,
-    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => offer.coordinates),
+    coordinatesOfOffersByCity: getObjectDataByCity(`Amsterdam`, TEST_OFFERS).offers.map((offer) => ({id: offer.id, coordinates: offer.coordinates})),
     activeMarkerIndex: 0
   });
 });
