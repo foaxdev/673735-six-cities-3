@@ -4,14 +4,13 @@ import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import ApartmentDetailed from "../apartment-detailed/apartment-detailed";
 import {connect} from "react-redux";
+import MainEmpty from "../main-empty/main-empty";
 
 export class App extends React.PureComponent {
 
   _renderScreen() {
     if (this.props.currentPage === -1) {
-      return (
-        <Main />
-      );
+      return (this.props.offersByCityQuantity > 0 ? <Main /> : <MainEmpty />);
     } else {
       return (
         <ApartmentDetailed />
@@ -33,10 +32,12 @@ export class App extends React.PureComponent {
 }
 
 App.propTypes = {
+  offersByCityQuantity: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  offersByCityQuantity: state.offersByCityQuantity,
   currentPage: state.currentPage
 });
 
